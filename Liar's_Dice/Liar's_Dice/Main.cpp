@@ -29,7 +29,7 @@ int main(int argc, char* argv[])
 	return 0;
 }
 
-void initPlayers(vector<string> &names)
+void initPlayers(vector<string> names)
 {
 	//Dummy for now. Otherwise will create the players.
 	//Will return a vector of the type player
