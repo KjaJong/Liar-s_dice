@@ -33,4 +33,5 @@
 *.db
 *.user
 *.suo
+debug/
 *.opendb
