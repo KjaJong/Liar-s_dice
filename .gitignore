@@ -31,6 +31,6 @@
 # Self added files
 *.VC
 *.db
-*.opendb
 *.user
 *.suo
+*.opendb
