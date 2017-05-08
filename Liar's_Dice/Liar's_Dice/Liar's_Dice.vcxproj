@@ -142,7 +142,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\GameController.cpp" />
+    <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\LogicHandler.cpp" />
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Main.cpp" />
+    <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Player.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\GameController.h" />
+    <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\LogicHandler.h" />
+    <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Player.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
