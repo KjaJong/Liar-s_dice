@@ -27,3 +27,9 @@
 *.exe
 *.out
 *.app
+
+# Self added files
+*.VC
+*.db
+*.user
+*.suo
