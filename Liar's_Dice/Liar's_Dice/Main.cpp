@@ -5,9 +5,8 @@
 
 using namespace std;
 
-void initPlayers(vector<string> names);
-
-vector<Player> playerList;
+vector<Player> initPlayers(vector<string> names);
+void gameLoop(vector<Player> players);
 
 int main(int argc, char* argv[])
 {
@@ -32,34 +31,30 @@ int main(int argc, char* argv[])
 		cout << "Player " << i2 + 1 << " has this name: " << playerNames[i2] << endl;
 	}
 
-	initPlayers(playerNames);
+	gameLoop(initPlayers(playerNames));
 
 	system("pause");
 	return 0;
 }
 
-void initPlayers(vector<string> players)
+//initialize players and return them
+vector<Player> initPlayers(vector<string> players)
 {
+	vector<Player> playerList;
+
 	for (int i = 0; i < players.size(); i ++)
 	{
 		Player player = Player(players[i]);
 		playerList.push_back(player);
 	}
 
-	//TEMP
-	for (int j = 0; j < playerList.size(); j ++)
-	{
-		playerList[j].toString();
-	}
-	//END TEMP
-
-	//Dummy for now. Otherwise will create the players.
-	//Will return a vector of the type player
+	return playerList;
 }
 
-void gameLoop()
+void gameLoop(vector<Player> players)
 {
-	cout << "mac?" << endl;
+
+	cout << players.size() << " players joined the game." << endl;
 
 	//Would start the game loop and handle ending the game.
 	//In the final product, this would switch the start screen to the game

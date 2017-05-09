@@ -1,8 +1,5 @@
-﻿  Player.cpp
-  Main.cpp
-c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\main.cpp(30): warning C4018: '<': signed/unsigned mismatch
-c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\main.cpp(43): warning C4018: '<': signed/unsigned mismatch
-c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\main.cpp(50): warning C4018: '<': signed/unsigned mismatch
-c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\main.cpp(52): error C2039: 'toString': is not a member of 'Player'
-  c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\player.h(7): note: see declaration of 'Player'
-  Generating Code...
+﻿  Main.cpp
+c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\main.cpp(29): warning C4018: '<': signed/unsigned mismatch
+c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\main.cpp(45): warning C4018: '<': signed/unsigned mismatch
+  Liar's_Dice.vcxproj -> C:\Users\Tom Remeeus\Documents\GitHub\Liar-s_dice\Liar's_Dice\Debug\Liar's_Dice.exe
+  Liar's_Dice.vcxproj -> C:\Users\Tom Remeeus\Documents\GitHub\Liar-s_dice\Liar's_Dice\Debug\Liar's_Dice.pdb (Full PDB)

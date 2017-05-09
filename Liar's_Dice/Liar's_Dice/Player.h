@@ -1,13 +1,12 @@
 #pragma once
 #include <string>
 
-using namespace std;
-
 class Player
 {
 public:
-	Player(string name);
+	Player(std::string name);
 	~Player();
-	string toString();
+	int diceAmount();
+	void reduce(); 
 };
 
