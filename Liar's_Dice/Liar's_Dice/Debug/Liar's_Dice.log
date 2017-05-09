@@ -1,0 +1,8 @@
+﻿  Player.cpp
+  Main.cpp
+c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\main.cpp(30): warning C4018: '<': signed/unsigned mismatch
+c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\main.cpp(43): warning C4018: '<': signed/unsigned mismatch
+c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\main.cpp(50): warning C4018: '<': signed/unsigned mismatch
+c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\main.cpp(52): error C2039: 'toString': is not a member of 'Player'
+  c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\player.h(7): note: see declaration of 'Player'
+  Generating Code...

@@ -2,7 +2,9 @@
 #include <iostream>
 #include <vector>
 
-std::vector<int> currentBid;
+using namespace std;
+
+vector<int> currentBid;
 
 GameController::GameController()
 {
