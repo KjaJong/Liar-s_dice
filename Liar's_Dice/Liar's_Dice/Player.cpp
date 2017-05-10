@@ -10,8 +10,8 @@
 using namespace std;
 
 void rollDice(int);
-std::vector<int> diceCup;
-std::vector<int> getDice();
+vector<int> diceCup;
+vector<int> getDice();
 
 string name;
 int dice;
@@ -43,6 +43,6 @@ void rollDice(int amountOfDice)
 	diceCup = cup;
 }
 
-std::vector<int> getDice() {
+vector<int> getDice() {
 	return diceCup;
 }
