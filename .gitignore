@@ -27,18 +27,3 @@
 *.exe
 *.out
 *.app
-
-# Self added files
-*.VC
-*.db
-*.user
-*.suo
-*.opendb
-*.ipch
-*.ilk
-*.pdb
-*.log
-*.idb
-*.tlog
-*.lastbuildstate
-
