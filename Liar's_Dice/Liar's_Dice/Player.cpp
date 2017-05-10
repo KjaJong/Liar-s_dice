@@ -9,6 +9,10 @@
 
 using namespace std;
 
+void rollDice(int);
+vector<int> diceCup;
+vector<int> getDice();
+
 string name;
 int dice;
 
@@ -23,7 +27,7 @@ Player::~Player()
 
 }
 
-vector<int> rollDice(int amountOfDice)
+void rollDice(int amountOfDice)
 {
 	vector<int> cup = {};
 
@@ -36,5 +40,9 @@ vector<int> rollDice(int amountOfDice)
 			cup.push_back(rand() % 6 + 1);
 		}
 	}
-	return cup;
+	diceCup = cup;
+}
+
+vector<int> getDice() {
+	return diceCup;
 }
