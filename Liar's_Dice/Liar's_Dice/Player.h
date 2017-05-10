@@ -8,5 +8,6 @@ public:
 	~Player();
 	int diceAmount();
 	void reduce(); 
+	void printName();
 };
 

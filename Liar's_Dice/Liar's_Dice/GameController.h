@@ -9,5 +9,6 @@ class GameController
 public:
 	GameController(vector<Player> players);
 	~GameController();
+	void pickPlayer();
 };
 

@@ -1,6 +1,6 @@
+#include "Player.h"
 #include <string>
 #include <iostream>
-#include "Player.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -45,4 +45,9 @@ void rollDice(int amountOfDice)
 
 vector<int> getDice() {
 	return diceCup;
+}
+
+void Player::printName()
+{
+	cout << name << endl;
 }

@@ -2,6 +2,7 @@
 #include <vector>
 #include <string>
 #include "Player.h"
+#include "GameController.h"
 
 using namespace std;
 
@@ -52,8 +53,10 @@ vector<Player> initPlayers(vector<string> players)
 
 void gameLoop(vector<Player> players)
 {
-
 	cout << players.size() << " players joined the game." << endl;
+
+	GameController CG = GameController(players);
+
 	//Would start the game loop and handle ending the game.
 	//In the final product, this would switch the start screen to the game
 	//After that, this will do squat untill the game ends (and after that, i don't know).
