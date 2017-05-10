@@ -1,3 +1,5 @@
+#include <string>
+#include <iostream>
 #include "Player.h"
 #include <iostream>
 #include <stdio.h>
@@ -5,30 +7,36 @@
 #include <vector>
 #include <time.h>
 
-void rollDice(int);
+using namespace std;
 
+void rollDice(int);
 std::vector<int> diceCup;
 std::vector<int> getDice();
 
-Player::Player()
-{
-}
+string name;
+int dice;
 
+Player::Player(string n)
+{
+	name = n;
+	dice = 5;
+}
 
 Player::~Player()
 {
+
 }
 
 void rollDice(int amountOfDice)
 {
-	std::vector<int> cup = {};
+	vector<int> cup = {};
 
 	for (int counter = 0; counter < amountOfDice - 1; counter++)
 	{
 		srand(time(NULL));
 		for (int i = 0; i <6; i++)
 		{
-			std::cout << rand() % 6 + 1 << std::endl;
+			cout << rand() % 6 + 1 << endl;
 			cup.push_back(rand() % 6 + 1);
 		}
 	}
