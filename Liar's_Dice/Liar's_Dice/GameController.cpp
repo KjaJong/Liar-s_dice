@@ -1,20 +1,40 @@
 #include "GameController.h"
+#include "Player.h"
 #include <iostream>
 #include <vector>
 
 using namespace std;
 
-vector<int> currentBid;
+vector<int> curBid;
+Player curPlayer("");
+Player prePlayer("");
 
-GameController::GameController()
+GameController::GameController(vector<Player> players)
 {
+
 }
 
 GameController::~GameController()
 {
+
 }
 
-void initPlayers()
+void pickPlayer()
+{
+
+}
+
+void pickOrder()
+{
+
+}
+
+void checkPlayers()
+{
+
+}
+
+void deletePlayer()
 {
 
 }
