@@ -34,3 +34,11 @@
 *.user
 *.suo
 *.opendb
+*.ipch
+*.ilk
+*.pdb
+*.log
+*.idb
+*.tlog
+*.lastbuildstate
+
