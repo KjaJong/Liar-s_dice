@@ -1,5 +1,3 @@
-﻿  Main.cpp
-c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\main.cpp(29): warning C4018: '<': signed/unsigned mismatch
-c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\main.cpp(45): warning C4018: '<': signed/unsigned mismatch
+﻿  GameController.cpp
   Liar's_Dice.vcxproj -> C:\Users\Tom Remeeus\Documents\GitHub\Liar-s_dice\Liar's_Dice\Debug\Liar's_Dice.exe
   Liar's_Dice.vcxproj -> C:\Users\Tom Remeeus\Documents\GitHub\Liar-s_dice\Liar's_Dice\Debug\Liar's_Dice.pdb (Full PDB)
