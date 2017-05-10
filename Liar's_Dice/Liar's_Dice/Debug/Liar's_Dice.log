@@ -1,0 +1,4 @@
+﻿  Main.cpp
+c:\users\hugo\git\liar-s_dice\liar's_dice\liar's_dice\main.cpp(22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  Liar's_Dice.vcxproj -> C:\Users\Hugo\git\Liar-s_dice\Liar's_Dice\Debug\Liar's_Dice.exe
+  Liar's_Dice.vcxproj -> C:\Users\Hugo\git\Liar-s_dice\Liar's_Dice\Debug\Liar's_Dice.pdb (Partial PDB)
