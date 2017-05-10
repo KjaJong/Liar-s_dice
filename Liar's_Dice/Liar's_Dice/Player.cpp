@@ -5,7 +5,10 @@
 #include <vector>
 #include <time.h>
 
-std::vector<int> rollDice(int);
+void rollDice(int);
+
+std::vector<int> diceCup;
+std::vector<int> getDice();
 
 Player::Player()
 {
@@ -16,7 +19,7 @@ Player::~Player()
 {
 }
 
-std::vector<int> rollDice(int amountOfDice)
+void rollDice(int amountOfDice)
 {
 	std::vector<int> cup = {};
 
@@ -29,5 +32,9 @@ std::vector<int> rollDice(int amountOfDice)
 			cup.push_back(rand() % 6 + 1);
 		}
 	}
-	return cup;
+	diceCup = cup;
+}
+
+std::vector<int> getDice() {
+	return diceCup;
 }
