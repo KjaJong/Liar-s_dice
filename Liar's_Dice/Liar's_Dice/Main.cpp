@@ -12,7 +12,6 @@ int main(int argc, char* argv[])
 {
 	vector<string> playerNames;
 	string players;
-
 	cout << "How many will be playing?" << endl;
 	getline(cin, players);
 
@@ -26,13 +25,13 @@ int main(int argc, char* argv[])
 		playerNames.push_back(temp);
 	}
 
+
 	for (int i2 = 0; i2 < playerNames.size(); i2++)
 	{
 		cout << "Player " << i2 + 1 << " has this name: " << playerNames[i2] << endl;
 	}
 
 	gameLoop(initPlayers(playerNames));
-
 	system("pause");
 	return 0;
 }
@@ -55,7 +54,6 @@ void gameLoop(vector<Player> players)
 {
 
 	cout << players.size() << " players joined the game." << endl;
-
 	//Would start the game loop and handle ending the game.
 	//In the final product, this would switch the start screen to the game
 	//After that, this will do squat untill the game ends (and after that, i don't know).

@@ -1,6 +1,11 @@
 #include <string>
 #include <iostream>
 #include "Player.h"
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <vector>
+#include <time.h>
 
 using namespace std;
 
@@ -18,16 +23,18 @@ Player::~Player()
 
 }
 
-//takes one dice from player
-void Player::reduce()
+vector<int> rollDice(int amountOfDice)
 {
-	if (dice > 0)
-	{
-		dice = dice - 1;
-	}
-}
+	vector<int> cup = {};
 
-int Player::diceAmount()
-{
-	return dice;
+	for (int counter = 0; counter < amountOfDice - 1; counter++)
+	{
+		srand(time(NULL));
+		for (int i = 0; i <6; i++)
+		{
+			cout << rand() % 6 + 1 << endl;
+			cup.push_back(rand() % 6 + 1);
+		}
+	}
+	return cup;
 }
