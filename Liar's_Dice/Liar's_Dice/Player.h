@@ -6,7 +6,9 @@ class Player
 public:
 	Player(std::string name);
 	~Player();
-	int diceAmount();
-	void reduce(); 
+	void rollDice(int);
+	vector<int> getDice();
+	void decrementDice();
+
 };
 

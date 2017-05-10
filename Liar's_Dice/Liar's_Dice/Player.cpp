@@ -46,3 +46,7 @@ void rollDice(int amountOfDice)
 vector<int> getDice() {
 	return diceCup;
 }
+
+void decrementDice() {
+	dice--;
+}
