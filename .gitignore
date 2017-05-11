@@ -30,3 +30,6 @@
 *.tlog
 *.lastbuildstate
 *.opendb
+*.suo
+*.db
+*.VC
