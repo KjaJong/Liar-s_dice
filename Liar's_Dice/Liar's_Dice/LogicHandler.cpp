@@ -76,6 +76,7 @@ bool containsElements( vector<int> base, vector<int> comparison) {
 		if (comparison.size() == 0)
 			return true;
 	}
+	return false;
 }
 
 bool vecContains(vector<int>* vec, int toFind) {

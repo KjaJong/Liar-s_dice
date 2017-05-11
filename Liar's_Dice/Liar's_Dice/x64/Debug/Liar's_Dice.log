@@ -1,8 +1,10 @@
-﻿  GameController.cpp
-c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\gamecontroller.cpp(35): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
-  Generating Code...
-  Compiling...
+﻿  Player.cpp
+c:\users\menno\documents\2.4_liars_dice\liar's_dice\liar's_dice\player.cpp(32): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Main.cpp
+  LogicHandler.cpp
+c:\users\menno\documents\2.4_liars_dice\liar's_dice\liar's_dice\logichandler.cpp(65): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  GameController.cpp
+c:\users\menno\documents\2.4_liars_dice\liar's_dice\liar's_dice\gamecontroller.cpp(28): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
-  Liar's_Dice.vcxproj -> C:\Users\Tom Remeeus\Documents\GitHub\Liar-s_dice\Liar's_Dice\x64\Debug\Liar's_Dice.exe
-  Liar's_Dice.vcxproj -> C:\Users\Tom Remeeus\Documents\GitHub\Liar-s_dice\Liar's_Dice\x64\Debug\Liar's_Dice.pdb (Full PDB)
+  Liar's_Dice.vcxproj -> C:\Users\Menno\Documents\2.4_Liars_Dice\Liar's_Dice\x64\Debug\Liar's_Dice.exe
+  Liar's_Dice.vcxproj -> C:\Users\Menno\Documents\2.4_Liars_Dice\Liar's_Dice\x64\Debug\Liar's_Dice.pdb (Full PDB)

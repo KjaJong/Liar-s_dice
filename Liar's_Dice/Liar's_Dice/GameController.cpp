@@ -43,7 +43,7 @@ void GameController::checkPlayers()
 {
 	for (int i = 0; i < players.size(); i ++)
 	{
-		if (players[i].getDice() == 0)
+		if (players[i].getAmountOfDice() == 0)
 		{
 			deletePlayer(i);
 		}
