@@ -1,20 +1,16 @@
+#include "Player.h"
 #include <string>
 #include <iostream>
-#include "Player.h"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
 #include <vector>
 #include <time.h>
 
-using namespace std;
 
 void rollDice(int);
 vector<int> diceCup;
 vector<int> getDice();
-
-string name;
-int dice;
 
 Player::Player(string n)
 {
@@ -25,6 +21,11 @@ Player::Player(string n)
 Player::~Player()
 {
 
+}
+
+int Player::getDice()
+{
+	return dice;
 }
 
 void rollDice(int amountOfDice)
@@ -45,4 +46,9 @@ void rollDice(int amountOfDice)
 
 vector<int> getDice() {
 	return diceCup;
+}
+
+string Player::getName()
+{
+	return name;
 }
