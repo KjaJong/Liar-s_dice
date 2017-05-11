@@ -5,13 +5,9 @@
 
 using namespace std;
 
-Player curPlayer("");
-
 GameController::GameController(vector<Player> list)
 {
 	players = list;
-	pickFirstPlayer();
-	deletePlayer(0);
 }
 
 GameController::~GameController()
@@ -22,14 +18,25 @@ GameController::~GameController()
 void GameController::pickFirstPlayer()
 {
 	int pick = rand() % players.size() + 1;
-	curPlayer = players[pick - 1];
+	curPlayer = pick - 1;
 	
-	cout << "Player " << curPlayer.getName() << " has to begin the game." << endl;
+	cout << "Player " << players[curPlayer].getName() << " has to begin the game." << endl;
 }
 
-void pickNextplayer()
+void GameController::pickNextPlayer()
 {
+	int amount = players.size();
 
+	if (amount == (curPlayer + 1))
+	{
+		curPlayer = 0;
+	}
+	else
+	{
+		curPlayer = curPlayer + 1;
+	}
+
+	cout << "It's " << players[curPlayer].getName() << "'s turn." << endl;
 }
 
 void GameController::checkPlayers()

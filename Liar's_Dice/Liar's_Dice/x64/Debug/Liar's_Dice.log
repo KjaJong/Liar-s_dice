@@ -1,9 +1,8 @@
-﻿  Player.cpp
-c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\player.cpp(37): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  GameController.cpp
+﻿  GameController.cpp
+c:\users\tom remeeus\documents\github\liar-s_dice\liar's_dice\liar's_dice\gamecontroller.cpp(35): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
   Generating Code...
-  Skipping... (no relevant changes detected)
+  Compiling...
   Main.cpp
-LogicHandler.obj : warning LNK4099: PDB 'vc140.pdb' was not found with 'LogicHandler.obj' or at 'C:\Users\Tom Remeeus\Documents\GitHub\Liar-s_dice\Liar's_Dice\x64\Debug\vc140.pdb'; linking object as if no debug info
+  Generating Code...
   Liar's_Dice.vcxproj -> C:\Users\Tom Remeeus\Documents\GitHub\Liar-s_dice\Liar's_Dice\x64\Debug\Liar's_Dice.exe
   Liar's_Dice.vcxproj -> C:\Users\Tom Remeeus\Documents\GitHub\Liar-s_dice\Liar's_Dice\x64\Debug\Liar's_Dice.pdb (Full PDB)
