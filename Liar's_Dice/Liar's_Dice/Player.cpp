@@ -7,11 +7,6 @@
 #include <vector>
 #include <time.h>
 
-
-void rollDice(int);
-vector<int> diceCup;
-vector<int> getDice();
-
 Player::Player(string n)
 {
 	name = n;
@@ -23,12 +18,12 @@ Player::~Player()
 
 }
 
-int Player::getDice()
+int Player::getAmountOfDice()
 {
 	return dice;
 }
 
-void rollDice(int amountOfDice)
+void Player::rollDice(int amountOfDice)
 {
 	vector<int> cup = {};
 
@@ -44,7 +39,11 @@ void rollDice(int amountOfDice)
 	diceCup = cup;
 }
 
-vector<int> getDice() {
+void Player::reduceDice() {
+	dice--;
+}
+
+vector<int> Player::getDice() {
 	return diceCup;
 }
 
