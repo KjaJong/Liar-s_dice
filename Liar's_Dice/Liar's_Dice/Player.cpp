@@ -7,14 +7,10 @@
 #include <vector>
 #include <time.h>
 
-using namespace std;
 
 void rollDice(int);
 vector<int> diceCup;
 vector<int> getDice();
-
-string name;
-int dice;
 
 Player::Player(string n)
 {
@@ -25,6 +21,11 @@ Player::Player(string n)
 Player::~Player()
 {
 
+}
+
+int Player::getDice()
+{
+	return dice;
 }
 
 void rollDice(int amountOfDice)
@@ -47,7 +48,7 @@ vector<int> getDice() {
 	return diceCup;
 }
 
-void Player::printName()
+string Player::getName()
 {
-	cout << name << endl;
+	return name;
 }

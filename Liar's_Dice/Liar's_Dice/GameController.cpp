@@ -5,15 +5,13 @@
 
 using namespace std;
 
-vector<int> curBid;
-vector<Player> players;
 Player curPlayer("");
-Player prePlayer("");
 
 GameController::GameController(vector<Player> list)
 {
 	players = list;
-	pickPlayer();
+	pickFirstPlayer();
+	deletePlayer(0);
 }
 
 GameController::~GameController()
@@ -21,29 +19,32 @@ GameController::~GameController()
 
 }
 
-void GameController::pickPlayer()
+void GameController::pickFirstPlayer()
 {
-	int temp = rand() % 10;
-	cout << temp << endl;
-
-	/*
-	curPlayer = players[(rand() % players.size())];
-
-	cout << "The first player will be" << endl;
-	curPlayer.printName();*/
+	int pick = rand() % players.size() + 1;
+	curPlayer = players[pick - 1];
+	
+	cout << "Player " << curPlayer.getName() << " has to begin the game." << endl;
 }
 
-void pickOrder()
+void pickNextplayer()
 {
 
 }
 
-void checkPlayers()
+void GameController::checkPlayers()
 {
-
+	for (int i = 0; i < players.size(); i ++)
+	{
+		if (players[i].getDice() == 0)
+		{
+			deletePlayer(i);
+		}
+	}
 }
 
-void deletePlayer()
+void GameController::deletePlayer(int index)
 {
-
+	cout << "Player " << players[index].getName() <<  " is out of dice." << endl;
+	players.erase(players.begin() + index);
 }

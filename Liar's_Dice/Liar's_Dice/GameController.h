@@ -6,9 +6,16 @@ using namespace std;
 
 class GameController
 {
+private:
+	vector<int> curBid;
+	vector<Player> players;
+	
 public:
 	GameController(vector<Player> players);
 	~GameController();
-	void pickPlayer();
+
+	void pickFirstPlayer();
+	void checkPlayers();
+	void deletePlayer(int);
 };
 
