@@ -29,3 +29,6 @@
 *.app
 *.tlog
 *.lastbuildstate
+*.VC.db
+*.opendb
+Debug/
