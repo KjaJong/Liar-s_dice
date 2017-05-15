@@ -26,14 +26,13 @@ vector<Player> initPlayers()
 
 	std::cout << "Enter the amount of players: " << std::endl;
 	std::cin >> amount;
-	std::cin.ignore(INT_MAX);
+	
 
 	for (int i = 0; i < amount; i++)
 	{
 		std::cout << "Enter name for player " << i + 1 << " :" << std::endl;
 		string name;
 		std::cin >> name;
-		std::cin.ignore(INT_MAX);
 		players.push_back(name);
 	}
 
@@ -43,6 +42,10 @@ vector<Player> initPlayers()
 void gameLoop(vector<Player> players)
 {
 	GameController CG = GameController(players);
+
+	CG.rollDice();
+
+	CG.pickFirstPlayer();
 
 	//Would start the game loop and handle ending the game.
 	//In the final product, this would switch the start screen to the game

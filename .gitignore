@@ -36,3 +36,4 @@
 *.db
 *.VC
 *.log
+Debug/

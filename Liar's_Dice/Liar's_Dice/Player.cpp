@@ -9,6 +9,7 @@ using std::string;
 
 Player::Player(string n)
 {
+	srand(time(nullptr));
 	name = n;
 	dice = 5;
 }
@@ -27,14 +28,9 @@ void Player::rollDice(int amountOfDice)
 {
 	vector<int> cup = {};
 
-	for (int counter = 0; counter < amountOfDice - 1; counter++)
+	for (int i = 0; i < amountOfDice; i++)
 	{
-		srand(time(nullptr));
-		for (int i = 0; i <6; i++)
-		{
-			std::cout << rand() % 6 + 1 << std::endl;
-			cup.push_back(rand() % 6 + 1);
-		}
+		cup.push_back(rand() % 6 + 1);
 	}
 	diceCup = cup;
 }
