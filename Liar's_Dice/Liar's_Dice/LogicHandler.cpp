@@ -1,10 +1,9 @@
 #include "LogicHandler.h"
 #include <iostream>
 #include <vector>
-using namespace std;
 
-using namespace std;
-
+using std::vector;
+using std::string;
 
 // Checks if the new bid has a higher value then the last bid
 // Returns true if the new bid is a higher value
@@ -57,7 +56,7 @@ bool spotOn(vector<int>* actual, vector<int>* bid)
 // ex: base[5, 2, 5]; comparison[5,5]; Checks if the two fives from comparison are in base; base contains the elements of comparison so return true
 bool containsElements( vector<int> base, vector<int> comparison) {
 	if (comparison.size() == 0)
-		cout << "Error: Vector comparison has no elements \n\t@LogicHandler.cpp \n\t@vecContainsElements(vector<int>, vector<int>)" << endl;
+		std::cout << "Error: Vector comparison has no elements \n\t@LogicHandler.cpp \n\t@vecContainsElements(vector<int>, vector<int>)" << std::endl;
 
 	if (comparison.size() > base.size())
 		return false;

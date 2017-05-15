@@ -1,11 +1,11 @@
 #include "Player.h"
-#include <string>
 #include <iostream>
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
 #include <vector>
+#include <string>
 #include <time.h>
+
+using std::vector;
+using std::string;
 
 Player::Player(string n)
 {
@@ -29,10 +29,10 @@ void Player::rollDice(int amountOfDice)
 
 	for (int counter = 0; counter < amountOfDice - 1; counter++)
 	{
-		srand(time(NULL));
+		srand(time(nullptr));
 		for (int i = 0; i <6; i++)
 		{
-			cout << rand() % 6 + 1 << endl;
+			std::cout << rand() % 6 + 1 << std::endl;
 			cup.push_back(rand() % 6 + 1);
 		}
 	}

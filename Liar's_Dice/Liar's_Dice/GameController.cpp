@@ -2,8 +2,10 @@
 #include "Player.h"
 #include <iostream>
 #include <vector>
+#include <string>
 
-using namespace std;
+using std::vector;
+using std::string;
 
 GameController::GameController(vector<Player> list)
 {
@@ -19,8 +21,8 @@ void GameController::pickFirstPlayer()
 {
 	int pick = rand() % players.size() + 1;
 	curPlayer = pick - 1;
-	
-	cout << "Player " << players[curPlayer].getName() << " has to begin the game." << endl;
+
+	std::cout << "Player " << players[curPlayer].getName() << " has to begin the game." << std::endl;
 }
 
 void GameController::pickNextPlayer()
@@ -36,7 +38,7 @@ void GameController::pickNextPlayer()
 		curPlayer = curPlayer + 1;
 	}
 
-	cout << "It's " << players[curPlayer].getName() << "'s turn." << endl;
+	std::cout << "It's " << players[curPlayer].getName() << "'s turn." << std::endl;
 }
 
 void GameController::checkPlayers()
@@ -52,6 +54,6 @@ void GameController::checkPlayers()
 
 void GameController::deletePlayer(int index)
 {
-	cout << "Player " << players[index].getName() <<  " is out of dice." << endl;
+	std::cout << "Player " << players[index].getName() <<  " is out of dice." << std::endl;
 	players.erase(players.begin() + index);
 }

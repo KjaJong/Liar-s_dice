@@ -4,7 +4,8 @@
 #include "Player.h"
 #include "GameController.h"
 
-using namespace std;
+using std::vector;
+using std::string;
 
 vector<Player> initPlayers();
 void gameLoop(vector<Player> players);
@@ -23,14 +24,16 @@ vector<Player> initPlayers()
 	vector<Player> players;
 	int amount;
 
-	cout << "Enter the amount of players: " << endl;
-	cin >> amount;
+	std::cout << "Enter the amount of players: " << std::endl;
+	std::cin >> amount;
+	std::cin.ignore(INT_MAX);
 
 	for (int i = 0; i < amount; i++)
 	{
-		cout << "Enter name for player " << i + 1 << " :" << endl;
+		std::cout << "Enter name for player " << i + 1 << " :" << std::endl;
 		string name;
-		cin >> name;
+		std::cin >> name;
+		std::cin.ignore(INT_MAX);
 		players.push_back(name);
 	}
 
