@@ -13,6 +13,11 @@ private:
 	int curPlayer;
 	vector<int> curBid;
 	vector<Player> players;
+
+	vector<int> setBet();
+	void raise();
+	void callBluff();
+	void spotOn();
 	
 public:
 	GameController(vector<Player> players);
