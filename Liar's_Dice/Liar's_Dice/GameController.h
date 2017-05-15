@@ -2,7 +2,8 @@
 #include "Player.h"
 #include <vector>
 
-using namespace std;
+using std::vector;
+using std::string;
 
 class GameController
 {
