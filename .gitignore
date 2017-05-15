@@ -29,11 +29,11 @@
 *.app
 
 #additions
-*.tlog
-*.lastbuildstate
-*.opendb
-*.suo
-*.db
-*.VC
-*.log
+**.tlog
+**.lastbuildstate
+**.opendb
+**.suo
+**.db
+**.VC
+**.log
 Debug/
