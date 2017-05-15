@@ -1,19 +1,15 @@
 #include "Player.h"
-#include <string>
 #include <iostream>
-#include <iostream>
-#include <stdio.h>
-#include <stdlib.h>
 #include <vector>
+#include <string>
 #include <time.h>
 
-
-void rollDice(int);
-vector<int> diceCup;
-vector<int> getDice();
+using std::vector;
+using std::string;
 
 Player::Player(string n)
 {
+	srand(time(nullptr));
 	name = n;
 	dice = 5;
 }
@@ -23,28 +19,27 @@ Player::~Player()
 
 }
 
-int Player::getDice()
+int Player::getAmountOfDice()
 {
 	return dice;
 }
 
-void rollDice(int amountOfDice)
+void Player::rollDice(int amountOfDice)
 {
 	vector<int> cup = {};
 
-	for (int counter = 0; counter < amountOfDice - 1; counter++)
+	for (int i = 0; i < amountOfDice; i++)
 	{
-		srand(time(NULL));
-		for (int i = 0; i <6; i++)
-		{
-			cout << rand() % 6 + 1 << endl;
-			cup.push_back(rand() % 6 + 1);
-		}
+		cup.push_back(rand() % 6 + 1);
 	}
 	diceCup = cup;
 }
 
-vector<int> getDice() {
+void Player::reduceDice() {
+	dice--;
+}
+
+vector<int> Player::getDice() {
 	return diceCup;
 }
 

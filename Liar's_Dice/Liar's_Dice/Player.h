@@ -1,18 +1,23 @@
 #pragma once
-#include <string>
-using namespace std;
+#include <vector>
+
+using std::vector;
+using std::string;
 
 class Player
 {
 private:
 	string name;
 	int dice;
+	vector<int> diceCup;
 
 public:
-	Player(std::string name);
+	Player(string name);
 	~Player();
-	int getDice();
-	void reduce(); 
-	std::string getName();
+	void rollDice(int);
+	vector<int> getDice();
+	int getAmountOfDice();
+	void reduceDice();
+	string getName();
 };
 

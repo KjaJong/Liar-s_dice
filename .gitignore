@@ -27,8 +27,13 @@
 *.exe
 *.out
 *.app
-*.tlog
-*.lastbuildstate
-*.VC.db
-*.opendb
+
+#additions
+**.tlog
+**.lastbuildstate
+**.opendb
+**.suo
+**.db
+**.VC
+**.log
 Debug/
