@@ -10,6 +10,8 @@ using std::vector;
 using std::string;
 
 LogicHandler LH;
+
+int previousPlayer;
 vector<int> curBid;
 vector<int> newBid;
 
@@ -34,16 +36,28 @@ void GameController::pickFirstPlayer()
 	curBid = setBet();
 }
 
+void GameController::pickFirstPlayer(int player)
+{
+	if (player >= players.size()) { curPlayer = 0; }
+	else { curPlayer = player; }
+
+	rollDice();
+	std::cout << "Player " << players[curPlayer].getName() << " has to begin the game." << std::endl;
+	curBid = setBet();
+}
+
 void GameController::pickNextPlayer()
 {
 	int amount = players.size();
 
 	if (amount == (curPlayer + 1))
 	{
+		previousPlayer = curPlayer;
 		curPlayer = 0;
 	}
 	else
 	{
+		previousPlayer = curPlayer;
 		curPlayer = curPlayer + 1;
 	}
 
@@ -84,8 +98,10 @@ void GameController::turn()
 			raise();
 			break;
 		case 2:
+			spotOn();
 			break;
 		case 3:
+			callBluff();
 			break;
 	}
 }
@@ -126,10 +142,40 @@ void GameController::raise()
 	}
 }
 
+//Method called when callBluff is selected. This removes a dice from either the previous player(true) or the current player(false).
 void GameController::callBluff()
 {
+	vector<int> playerDice = players[previousPlayer].getDice();
 
+	if(LH.callBluff(&playerDice, &curBid))
+	{
+		players[previousPlayer].reduceDice();
+		pickFirstPlayer(previousPlayer);
+	}
+	else
+	{
+		players[curPlayer].reduceDice();
+		pickFirstPlayer(curPlayer);
+	}
 }
+
+//Method called when callBluff is selected. This removes a dice from either the whole table(true) or the current player(false).
+void GameController::spotOn()
+{
+	vector<int> playerDice = players[previousPlayer].getDice();
+
+	if(LH.spotOn(&playerDice, &curBid))
+	{
+		for (int i = 0; i < players.size(); i++) { if (i != curPlayer) players[i].reduceDice(); }
+		pickFirstPlayer(curPlayer + 1);
+	}
+	else
+	{
+		players[curPlayer].reduceDice();
+		pickFirstPlayer(curPlayer);
+	}
+}
+
 
 vector<int> GameController::setBet()
 {

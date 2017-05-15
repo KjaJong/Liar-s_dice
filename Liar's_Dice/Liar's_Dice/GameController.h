@@ -24,6 +24,7 @@ public:
 	~GameController();
 
 	void pickFirstPlayer();
+	void pickFirstPlayer(int player);
 	void pickNextPlayer();
 	void turn();
 	void rollDice();
