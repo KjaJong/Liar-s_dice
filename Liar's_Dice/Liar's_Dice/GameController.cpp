@@ -41,7 +41,9 @@ void GameController::pickFirstPlayer(int player)
 	if (player >= players.size()) { curPlayer = 0; }
 	else { curPlayer = player; }
 
+	checkPlayers();
 	rollDice();
+
 	std::cout << "Player " << players[curPlayer].getName() << " has to begin the game." << std::endl;
 	curBid = setBet();
 }
@@ -72,6 +74,20 @@ void GameController::checkPlayers()
 		{
 			deletePlayer(i);
 		}
+	}
+	players.shrink_to_fit();
+
+	if (players.size() == 1)
+	{
+		std::cout << "Player " << players[0].getName() << " has won the game." << std::endl;
+		system("pause");
+		exit(0);
+	}
+	else if(players.size() <= 0)
+	{
+		std::cout << "There are no winners, only losers." << std::endl;
+		system("pause");
+		exit(0);
 	}
 }
 
