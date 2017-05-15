@@ -43,6 +43,10 @@ void gameLoop(vector<Player> players)
 {
 	GameController CG = GameController(players);
 
+	CG.rollDice();
+
+	CG.pickFirstPlayer();
+
 	//Would start the game loop and handle ending the game.
 	//In the final product, this would switch the start screen to the game
 	//After that, this will do squat untill the game ends (and after that, i don't know).
