@@ -134,11 +134,15 @@ void GameController::raise()
 
 	if (check)
 	{
-		std::cout << "yes me friend" << std::endl;
+		//set new current bid
+		std::cout << "New bid accepted." << std::endl;
+		curBid = newBid;
 	}
 	else
 	{
-		std::cout << "no no no sir" << std::endl;
+		//let the user bid again if last bid is incorrect
+		std::cout << "Make sure your new bid is higher than the last bid" << std::endl;
+		turn();
 	}
 }
 
