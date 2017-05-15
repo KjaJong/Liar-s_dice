@@ -9,9 +9,16 @@
 using std::vector;
 using std::string;
 
+LogicHandler LH;
+
+int previousPlayer;
+vector<int> curBid;
+vector<int> newBid;
+
 GameController::GameController(vector<Player> list)
 {
 	players = list;
+	LH = LogicHandler();
 }
 
 GameController::~GameController()
@@ -25,20 +32,18 @@ void GameController::pickFirstPlayer()
 	int pick = rand() % players.size() + 1;
 	curPlayer = pick - 1;
 	
-	//set bet
-	string bet;
 	std::cout << "Player " << players[curPlayer].getName() << " has to begin the game." << std::endl;
-	std::cout << "Please place your bet. Seperate your numbers with a comma (1,2,3,4): ";
-	std::cin >> bet;
+	curBid = setBet();
+}
 
-	//convert input to a vector of strings
-	vector<string> numbers;
-	std::istringstream split(bet);
-	string number;
-	while (getline(split, number, ','))
-	{
-		numbers.push_back(number);
-	}
+void GameController::pickFirstPlayer(int player)
+{
+	if (player >= players.size()) { curPlayer = 0; }
+	else { curPlayer = player; }
+
+	rollDice();
+	std::cout << "Player " << players[curPlayer].getName() << " has to begin the game." << std::endl;
+	curBid = setBet();
 }
 
 void GameController::pickNextPlayer()
@@ -47,10 +52,12 @@ void GameController::pickNextPlayer()
 
 	if (amount == (curPlayer + 1))
 	{
+		previousPlayer = curPlayer;
 		curPlayer = 0;
 	}
 	else
 	{
+		previousPlayer = curPlayer;
 		curPlayer = curPlayer + 1;
 	}
 
@@ -76,7 +83,27 @@ void GameController::deletePlayer(int index)
 
 void GameController::turn()
 {
-	
+	int choice;
+
+	std::cout << "Choose an action:" << std::endl;
+	std::cout << "*Press 1 to raise current bid" << std::endl;
+	std::cout << "*Press 2 to call spot on" << std::endl;
+	std::cout << "*Press 3 to call bluff" << std::endl;
+
+	std::cin >> choice;
+
+	switch (choice)
+	{
+		case 1:
+			raise();
+			break;
+		case 2:
+			spotOn();
+			break;
+		case 3:
+			callBluff();
+			break;
+	}
 }
 
 void GameController::rollDice()
@@ -96,4 +123,81 @@ void GameController::rollDice()
 
 		std::cout << std::endl;
 	}
+}
+
+void GameController::raise()
+{
+	bool check;
+
+	newBid = setBet();
+	check = LH.raise(&curBid, &newBid);
+
+	if (check)
+	{
+		//set new current bid
+		std::cout << "New bid accepted." << std::endl;
+		curBid = newBid;
+	}
+	else
+	{
+		//let the user bid again if last bid is incorrect
+		std::cout << "Make sure your new bid is higher than the last bid" << std::endl;
+		turn();
+	}
+}
+
+//Method called when callBluff is selected. This removes a dice from either the previous player(true) or the current player(false).
+void GameController::callBluff()
+{
+	vector<int> playerDice = players[previousPlayer].getDice();
+
+	if(LH.callBluff(&playerDice, &curBid))
+	{
+		players[previousPlayer].reduceDice();
+		pickFirstPlayer(previousPlayer);
+	}
+	else
+	{
+		players[curPlayer].reduceDice();
+		pickFirstPlayer(curPlayer);
+	}
+}
+
+//Method called when callBluff is selected. This removes a dice from either the whole table(true) or the current player(false).
+void GameController::spotOn()
+{
+	vector<int> playerDice = players[previousPlayer].getDice();
+
+	if(LH.spotOn(&playerDice, &curBid))
+	{
+		for (int i = 0; i < players.size(); i++) { if (i != curPlayer) players[i].reduceDice(); }
+		pickFirstPlayer(curPlayer + 1);
+	}
+	else
+	{
+		players[curPlayer].reduceDice();
+		pickFirstPlayer(curPlayer);
+	}
+}
+
+
+vector<int> GameController::setBet()
+{
+	//set bet
+	string bet;
+	
+	std::cout << "Please place your bet." << std::endl;
+	std::cin >> bet;
+
+	//convert input to a vector of ints
+	vector<int> numbers;
+	std::istringstream split(bet);
+	string number;
+	while (getline(split, number, ','))
+	{
+		int value = std::atoi(number.c_str());
+		numbers.push_back(value);
+	}
+
+	return numbers;
 }
