@@ -152,6 +152,13 @@
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\LogicHandler.h" />
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Player.h" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Liar%27s_Dice\DicePics\IMG_20170516_174740.jpg" />
+    <Image Include="..\..\Liar%27s_Dice\DicePics\IMG_20170516_174752.jpg" />
+    <Image Include="..\..\Liar%27s_Dice\DicePics\IMG_20170516_174801.jpg" />
+    <Image Include="..\..\Liar%27s_Dice\DicePics\IMG_20170516_174813.jpg" />
+    <Image Include="..\..\Liar%27s_Dice\DicePics\IMG_20170516_174820.jpg" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

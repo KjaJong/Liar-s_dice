@@ -39,4 +39,21 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\Liar%27s_Dice\DicePics\IMG_20170516_174740.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Liar%27s_Dice\DicePics\IMG_20170516_174752.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Liar%27s_Dice\DicePics\IMG_20170516_174801.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Liar%27s_Dice\DicePics\IMG_20170516_174813.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="..\..\Liar%27s_Dice\DicePics\IMG_20170516_174820.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
+  </ItemGroup>
 </Project>
