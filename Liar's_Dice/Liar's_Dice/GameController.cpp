@@ -1,6 +1,8 @@
 #include "GameController.h"
 #include "Player.h"
 #include "LogicHandler.h"
+#include "PlayerInput.h"
+#include "ReadDice.h"
 #include <iostream>
 #include <sstream>
 #include <vector>
@@ -10,6 +12,7 @@ using std::vector;
 using std::string;
 
 LogicHandler LH;
+PlayerInput PI;
 
 int previousPlayer;
 vector<int> curBid;
@@ -20,6 +23,7 @@ GameController::GameController(vector<Player> list)
 {
 	players = list;
 	LH = LogicHandler();
+	PI = PlayerInput();
 }
 
 GameController::~GameController()
@@ -125,6 +129,16 @@ void GameController::turn()
 
 void GameController::rollDice()
 {
+	ReadDice RD = ReadDice();
+
+	vector<int> dice = RD.CheckDice(PI.getPicture());
+
+	for (int i = 0; i < dice.size(); i++)
+	{
+		std::cout << dice[i] << std::endl;
+	}
+
+	/* UNUSED CODE
 	for (int i = 0; i < players.size(); i++)
 	{
 		int dice = players[i].getAmountOfDice();
@@ -140,6 +154,7 @@ void GameController::rollDice()
 
 		std::cout << std::endl;
 	}
+	*/
 }
 
 //TODO refactor without the new bid
