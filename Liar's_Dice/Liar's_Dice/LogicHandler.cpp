@@ -7,29 +7,25 @@ using std::string;
 
 // Checks if the new bid has a higher value then the last bid
 // Returns true if the new bid is a higher value
+//TODO vector<int>* bid from opencv module. This comes directly from OpenCV, so it will be scrapped soon
 bool LogicHandler::raise(const vector<int>* lastBid, const vector<int>* newBid)
 {
 	//check if new bid is not empty
-	if (newBid->size() == 0)
-		return false;
+	if (newBid->size() == 0) return false;
 
 	//check if newBid containts valid numbers
-	if (!validDice(newBid))
-		return false;
+	if (!validDice(newBid)) return false;
 
 	//check if newBid contains out of the same values
-	if (!sameValues(newBid))
-		return false;
+	if (!sameValues(newBid)) return false;
 
 	//check if the new value of eyes is higher
-	if (lastBid[0] < newBid[0]) {
-		
-			return true;
-	}
+	if (lastBid[0] < newBid[0]) return true;
+
 	//check if the eyes value 
-	else if (lastBid[0] == newBid[0]) {
-		if (lastBid->size() < newBid->size())
-			return true;
+	if (lastBid[0] == newBid[0]) 
+	{
+		if (lastBid->size() < newBid->size()) return true;
 	}
 
 	return false;
@@ -37,6 +33,7 @@ bool LogicHandler::raise(const vector<int>* lastBid, const vector<int>* newBid)
 
 // Checks if the bid is incorrect. 
 // Returns true if bid is incorrrect.
+//TODO vector<int>* bid from opencv module. This comes directly from OpenCV, so it will be scrapped soon
 bool LogicHandler::callBluff(vector<int>* actual, vector<int>* bid)
 {
 	return !containsElements(*actual, *bid);
@@ -44,6 +41,7 @@ bool LogicHandler::callBluff(vector<int>* actual, vector<int>* bid)
 
 // Checks if the bid is correct. 
 // Returns true if bid is correct.
+//TODO vector<int>* bid from opencv module. This comes directly from OpenCV, so it will be scrapped soon
 bool LogicHandler::spotOn(vector<int>* actual, vector<int>* bid)
 {
 	return containsElements(*actual, *bid);
