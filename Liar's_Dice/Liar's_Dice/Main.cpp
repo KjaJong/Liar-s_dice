@@ -3,8 +3,6 @@
 #include <string>
 #include "Player.h"
 #include "GameController.h"
-//TODO remove this to single header after testing
-#include "PlayerInput.h"
 
 using std::vector;
 using std::string;
@@ -14,9 +12,7 @@ void gameLoop(vector<Player> players);
 
 int main(int argc, char* argv[])
 {
-	PlayerInput input = PlayerInput();
-	input.captureInput();
-	//gameLoop(initPlayers());
+	gameLoop(initPlayers());
 
 	system("pause");
 	return 0;

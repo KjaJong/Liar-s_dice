@@ -21,7 +21,6 @@ PlayerInput::~PlayerInput()
 
 int PlayerInput::captureInput()
 {
-	// Open de camera met nummer 1 in lijst (red.: nr 0 was bij mij de camera in de klep van mijn laptop)  
 	VideoCapture cap(1);
 
 	// Controle of de camera wordt herkend.
@@ -30,14 +29,10 @@ int PlayerInput::captureInput()
 		std::cout << "Cannot open the video cam" << std::endl;
 		return -1;
 	}
-
-	// Breedte en hooogte van de frames die de camera genereert ophalen. 
+ 
 	double dWidth = cap.get(CV_CAP_PROP_FRAME_WIDTH);
 	double dHeight = cap.get(CV_CAP_PROP_FRAME_HEIGHT);
 	std::cout << "Frame size : " << dWidth << " x " << dHeight << std::endl;
-
-	// Continue loop waarin een beeld wordt opgehaald en wordt getoond in het window
-	
 
 	while (1)
 	{
