@@ -7,6 +7,6 @@ class ReadDice
 public:
 	ReadDice();
 	~ReadDice();
-	std::vector<int> CheckDice(cv::Mat& picture);
+	std::vector<int> CheckDice();
 };
 

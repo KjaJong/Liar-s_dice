@@ -7,8 +7,13 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/features2d.hpp>
+#include <opencv2\opencv.hpp>
+#include "opencv2/imgproc/imgproc.hpp" 
+#include "opencv2/highgui/highgui.hpp"
 
 using cv::Mat;
+using cv::Point;
+using std::vector;
 
 ReadDice::ReadDice()
 {
@@ -29,10 +34,6 @@ int countPips(cv::Mat dice)
 
 	// threshold
 	cv::threshold(dice, dice, 150, 255, cv::THRESH_BINARY | CV_THRESH_OTSU);
-
-	// show
-	cv::namedWindow("processed", true);
-	cv::imshow("processed", dice);
 
 	// floodfill
 	cv::floodFill(dice, cv::Point(0, 0), cv::Scalar(255));
@@ -60,59 +61,53 @@ int countPips(cv::Mat dice)
 	return keypoints.size();
 }
 
-std::vector<int> ReadDice::CheckDice(Mat& picture)
+std::vector<int> ReadDice::CheckDice()
 {
-	Mat pic = picture;
+	PlayerInput PI = PlayerInput();
+	Mat pic = PI.getPicture();
 	Mat buffer;
 
-	std::vector<std::vector<cv::Point> > diceContours;
-	std::vector<cv::Vec4i> diceHierarchy;
-	std::vector<int> dice;
+	vector<vector<Point>> contours;
+	vector<cv::Vec4i> hierarchy;
+	vector<int> dice;
 
-	try
+	//convert to grayscale
+	cvtColor(pic, buffer, CV_BGR2GRAY);
+	pic = buffer;
+
+	// threshold
+	threshold(pic, buffer, 150, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
+	pic = buffer;
+
+	// applying canny edge filter
+	Canny(pic, buffer, 2, 2 * 2, 3, false);
+	pic = buffer;
+
+	// detect dice shapes
+	findContours(pic, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
+	
+	// iterate over dice contours
+	for (int i = 0; i < contours.size(); i++)
 	{
-		//convert to grayscale
-		cvtColor(pic, buffer, CV_BGR2GRAY);
-		pic = buffer;
+		// get contour area
+		double diceContourArea = contourArea(contours[i]);
 
-		// threshold
-		cv::threshold(pic, buffer, 150, 255, cv::THRESH_BINARY | CV_THRESH_OTSU);
-		pic = buffer;
-
-		// applying canny edge filter
-		cv::Canny(pic, buffer, 2, 2 * 2, 3, false);
-		pic = buffer;
-
-		// detect dice shapes
-		cv::findContours(pic.clone(), diceContours, diceHierarchy, CV_RETR_EXTERNAL, cv::CHAIN_APPROX_SIMPLE);
-
-		// iterate over dice contours
-		for (int i = 0; i < diceContours.size(); i++)
+		// filter contours based on our dice size
+		if (diceContourArea > 2000 && diceContourArea < 3500)
 		{
-			// get contour area
-			double diceContourArea = cv::contourArea(diceContours[i]);
+			// get bounding rect
+			cv::Rect diceBoundsRect = cv::boundingRect(Mat(contours[i]));
 
-			// filter contours based on our dice size
-			if (diceContourArea > 2000 && diceContourArea < 3500)
-			{
-				// get bounding rect
-				cv::Rect diceBoundsRect = cv::boundingRect(cv::Mat(diceContours[i]));
+			// set dice roi
+			Mat diceROI = pic(diceBoundsRect);
 
-				// set dice roi
-				cv::Mat diceROI = pic(diceBoundsRect);
+			// count number of pips and add dice to vector
+			int numberOfPips = countPips(diceROI);
+			dice.push_back(numberOfPips);
 
-				// count number of pips and add dice to vector
-				int numberOfPips = countPips(diceROI);
-				dice.push_back(numberOfPips);
-
-				//TEMP CODE
-				std::cout << "Read dice: " << numberOfPips << std::endl;
-			}
+			//TEMP CODE
+			std::cout << "Read dice: " << numberOfPips << std::endl;
 		}
-	}
-	catch (int e)
-	{
-		std::cout << e << std::endl;
 	}
 
 	return dice;

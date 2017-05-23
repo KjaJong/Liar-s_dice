@@ -131,7 +131,7 @@ void GameController::rollDice()
 {
 	ReadDice RD = ReadDice();
 
-	vector<int> dice = RD.CheckDice(PI.getPicture());
+	vector<int> dice = RD.CheckDice();
 
 	for (int i = 0; i < dice.size(); i++)
 	{
