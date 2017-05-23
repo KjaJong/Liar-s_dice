@@ -51,5 +51,6 @@ int PlayerInput::captureInput()
 
 Mat PlayerInput::getPicture()
 {
+	std::cout << frame << std::endl;
 	return frame;
 }
