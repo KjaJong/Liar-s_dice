@@ -63,30 +63,33 @@ int countPips(cv::Mat dice)
 
 std::vector<int> ReadDice::CheckDice()
 {
-	PlayerInput PI = PlayerInput();
-	Mat pic = PI.getPicture();
-	Mat buffer;
-
-	vector<vector<Point>> contours;
-	vector<cv::Vec4i> hierarchy;
 	vector<int> dice;
 
+	PlayerInput PI = PlayerInput();
+	Mat pic = PI.getPicture();
+	//Mat pic = cv::imread("C:/Users/Tom Remeeus/Pictures/Random/checkkek.jpg", 1);
+
 	//convert to grayscale
-	cvtColor(pic, buffer, CV_BGR2GRAY);
-	pic = buffer;
+	cvtColor(pic, pic, CV_BGR2GRAY);
 
-	// threshold
-	threshold(pic, buffer, 150, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
-	pic = buffer;
+	//edit threshold
+	threshold(pic, pic, 10, 255, CV_THRESH_BINARY);
 
-	// applying canny edge filter
-	Canny(pic, buffer, 2, 2 * 2, 3, false);
-	pic = buffer;
+	//apply canny edge filter
+	//Canny(pic, pic, 100, 200, 3);
 
-	// detect dice shapes
+	//TEST
+	cv::namedWindow("test", CV_WINDOW_AUTOSIZE);
+	imshow("test", pic);
+	cv::waitKey(0);
+	//END TEST
+
+	//detect dice
+	vector<vector<Point> > contours;
+	vector<cv::Vec4i> hierarchy;
 	findContours(pic, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
 	
-	// iterate over dice contours
+	//iterate over dice contours
 	for (int i = 0; i < contours.size(); i++)
 	{
 		// get contour area
