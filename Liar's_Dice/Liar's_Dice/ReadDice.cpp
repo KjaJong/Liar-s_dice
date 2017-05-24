@@ -24,40 +24,31 @@ ReadDice::~ReadDice()
 
 }
 
-int countPips(cv::Mat dice)
+int countPips(Mat area)
 {
-	// resize
-	cv::resize(dice, dice, cv::Size(150, 150));
+	Mat dice = area;
 
-	// convert to grayscale
-	cvtColor(dice, dice, CV_BGR2GRAY);
+	resize(dice, dice, cv::Size(150, 150));
 
-	// threshold
-	cv::threshold(dice, dice, 150, 255, cv::THRESH_BINARY | CV_THRESH_OTSU);
+	floodFill(dice, cv::Point(0, 0), cv::Scalar(255));
+	floodFill(dice, cv::Point(0, 149), cv::Scalar(255));
+	floodFill(dice, cv::Point(149, 0), cv::Scalar(255));
+	floodFill(dice, cv::Point(149, 149), cv::Scalar(255));
 
-	// floodfill
-	cv::floodFill(dice, cv::Point(0, 0), cv::Scalar(255));
-	cv::floodFill(dice, cv::Point(0, 149), cv::Scalar(255));
-	cv::floodFill(dice, cv::Point(149, 0), cv::Scalar(255));
-	cv::floodFill(dice, cv::Point(149, 149), cv::Scalar(255));
-
-	// search for blobs
+	//search for blobs
 	cv::SimpleBlobDetector::Params params;
 
-	// filter by interia defines how elongated a shape is.
+	//filter by interia defines how elongated a shape is
 	params.filterByInertia = true;
 	params.minInertiaRatio = 0.5;
 
-	// will hold our keyponts
 	std::vector<cv::KeyPoint> keypoints;
 
-	// create new blob detector with our parameters
+	//create blob
 	cv::Ptr<cv::SimpleBlobDetector> blobDetector = cv::SimpleBlobDetector::create(params);
 
-	// detect blobs
 	blobDetector->detect(dice, keypoints);
 
-	// return number of pips
 	return keypoints.size();
 }
 
@@ -66,50 +57,51 @@ std::vector<int> ReadDice::CheckDice()
 	vector<int> dice;
 
 	PlayerInput PI = PlayerInput();
-	Mat pic = PI.getPicture();
-	//Mat pic = cv::imread("C:/Users/Tom Remeeus/Pictures/Random/checkkek.jpg", 1);
+	//Mat pic = PI.getPicture();
+	Mat pic = cv::imread("C:/Users/Tom Remeeus/Documents/GitHub/Liar-s_dice/Liar's_Dice/DicePics/test2.jpg", 1);
+	Mat buffer = pic;
 
-	//convert to grayscale
-	cvtColor(pic, pic, CV_BGR2GRAY);
+	//edit picture
+	cvtColor(buffer, buffer, CV_BGR2GRAY);
+	threshold(buffer, buffer, 125, 255, CV_THRESH_BINARY);
 
-	//edit threshold
-	threshold(pic, pic, 10, 255, CV_THRESH_BINARY);
-
-	//apply canny edge filter
-	//Canny(pic, pic, 100, 200, 3);
-
-	//TEST
-	cv::namedWindow("test", CV_WINDOW_AUTOSIZE);
-	imshow("test", pic);
-	cv::waitKey(0);
-	//END TEST
+	/*TEST
+	//cv::namedWindow("test", CV_WINDOW_AUTOSIZE);
+	//imshow("test", pic);
+	//cv::waitKey(0);
+	END TEST*/
 
 	//detect dice
 	vector<vector<Point> > contours;
 	vector<cv::Vec4i> hierarchy;
-	findContours(pic, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
+	findContours(buffer, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
 	
 	//iterate over dice contours
 	for (int i = 0; i < contours.size(); i++)
 	{
-		// get contour area
 		double diceContourArea = contourArea(contours[i]);
 
-		// filter contours based on our dice size
-		if (diceContourArea > 2000 && diceContourArea < 3500)
+		//filter small contours 
+		if (diceContourArea > 6000)
 		{
-			// get bounding rect
-			cv::Rect diceBoundsRect = cv::boundingRect(Mat(contours[i]));
+			//get bounding rect
+			cv::Rect diceBoundsRect = boundingRect(Mat(contours[i]));
+			Mat dicePic = pic(diceBoundsRect);
 
-			// set dice roi
-			Mat diceROI = pic(diceBoundsRect);
+			//edit dice picture
+			cvtColor(dicePic, dicePic, CV_BGR2GRAY);
+			threshold(dicePic, dicePic, 150, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
+			Canny(dicePic, dicePic, 2, 2*2, 3, false);
 
-			// count number of pips and add dice to vector
-			int numberOfPips = countPips(diceROI);
-			dice.push_back(numberOfPips);
+			/*TEST
+			cv::namedWindow("void", CV_WINDOW_AUTOSIZE);
+			imshow("void", dicePic);
+			cv::waitKey(0);
+			END TEST*/
 
-			//TEMP CODE
-			std::cout << "Read dice: " << numberOfPips << std::endl;
+			//count number of pips and add dice to vector
+			int pips = countPips(dicePic);
+			dice.push_back(pips);
 		}
 	}
 

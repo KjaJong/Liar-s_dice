@@ -133,11 +133,6 @@ void GameController::rollDice()
 
 	vector<int> dice = RD.CheckDice();
 
-	for (int i = 0; i < dice.size(); i++)
-	{
-		std::cout << dice[i] << std::endl;
-	}
-
 	/* UNUSED CODE
 	for (int i = 0; i < players.size(); i++)
 	{
