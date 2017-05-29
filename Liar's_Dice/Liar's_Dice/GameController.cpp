@@ -13,7 +13,6 @@ LogicHandler LH;
 
 int previousPlayer;
 vector<int> curBid;
-//TODO remove new bid
 vector<int> newBid;
 
 GameController::GameController(vector<Player> list)
@@ -142,7 +141,6 @@ void GameController::rollDice()
 	}
 }
 
-//TODO refactor without the new bid
 void GameController::raise()
 {
 	bool check;
