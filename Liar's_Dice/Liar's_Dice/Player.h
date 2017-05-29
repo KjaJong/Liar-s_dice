@@ -14,7 +14,8 @@ private:
 public:
 	Player(string name);
 	~Player();
-	void rollDice(int);
+	//void rollDice(int);
+	void setDice(vector<int> dice);
 	vector<int> getDice();
 	int getAmountOfDice();
 	void reduceDice();

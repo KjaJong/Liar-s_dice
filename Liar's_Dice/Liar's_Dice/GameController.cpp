@@ -131,7 +131,27 @@ void GameController::rollDice()
 {
 	ReadDice RD = ReadDice();
 
-	vector<int> dice = RD.CheckDice();
+	for (int i = 0; i < players.size(); i++)
+	{
+		//check amount of dice
+		int diceAmount = players[i].getAmountOfDice();
+		std::cout << players[i].getName() << " has to throw " << diceAmount << " dice." << std::endl;
+
+		//set new dice vector
+		std::cout << "Throw your dice and press enter." << std::endl;
+		system("pause");
+		vector<int> diceList = RD.CheckDice();
+
+		if (diceList.size() == diceAmount)
+		{
+			players[i].setDice(diceList);
+		}
+		else
+		{
+			std::cout << "Please throw the correct amount of dice." << std::endl;
+			i--;
+		}
+	}
 
 	/* UNUSED CODE
 	for (int i = 0; i < players.size(); i++)
