@@ -1,8 +1,8 @@
 #include "GameController.h"
 #include "Player.h"
 #include "LogicHandler.h"
+#include "ReadDice.h"
 #include <iostream>
-#include <sstream>
 #include <vector>
 #include <string>
 
@@ -10,16 +10,16 @@ using std::vector;
 using std::string;
 
 LogicHandler LH;
+ReadDice RD;
 
 int previousPlayer;
 vector<int> curBid;
-//TODO remove new bid
-vector<int> newBid;
 
 GameController::GameController(vector<Player> list)
 {
 	players = list;
 	LH = LogicHandler();
+	RD = ReadDice();
 }
 
 GameController::~GameController()
@@ -84,7 +84,8 @@ void GameController::checkPlayers()
 		system("pause");
 		exit(0);
 	}
-	else if(players.size() <= 0)
+
+	if(players.size() <= 0)
 	{
 		std::cout << "There are no winners, only losers." << std::endl;
 		system("pause");
@@ -120,6 +121,10 @@ void GameController::turn()
 		case 3:
 			callBluff();
 			break;
+		default:
+			std::cout << "Key not recognized." << std::endl;
+			turn();
+			break;
 	}
 }
 
@@ -127,27 +132,33 @@ void GameController::rollDice()
 {
 	for (int i = 0; i < players.size(); i++)
 	{
-		int dice = players[i].getAmountOfDice();
-		players[i].rollDice(dice);
+		//check amount of dice
+		int diceAmount = players[i].getAmountOfDice();
+		std::cout << players[i].getName() << " has to throw " << diceAmount << " dice." << std::endl;
 
-		std::cout << players[i].getName() << " threw: ";
+		//set new dice vector
+		std::cout << "Throw your dice and press enter." << std::endl;
+		system("pause");
+		vector<int> diceList = RD.CheckDice();
 
-		vector<int> thrownDice = players[i].getDice();
-		for (int j = 0; j < thrownDice.size(); j++)
+		if (diceList.size() == diceAmount)
 		{
-			std::cout << thrownDice[j] << " ";
+			players[i].setDice(diceList);
 		}
-
-		std::cout << std::endl;
+		else
+		{
+			std::cout << "Please throw the correct amount of dice." << std::endl;
+			i--;
+		}
 	}
 }
 
-//TODO refactor without the new bid
 void GameController::raise()
 {
 	bool check;
 
-	newBid = setBet();
+	//TODO check if the raise is possible anyway
+	vector<int> newBid = RD.CheckDice();
 	check = LH.raise(&curBid, &newBid);
 
 	if (check)
@@ -160,7 +171,7 @@ void GameController::raise()
 	{
 		//let the user bid again if last bid is incorrect
 		std::cout << "Make sure your new bid is higher than the last bid" << std::endl;
-		turn();
+		raise();
 	}
 }
 
@@ -201,21 +212,5 @@ void GameController::spotOn()
 
 vector<int> GameController::setBet()
 {
-	//set bet
-	string bet;
-	
-	std::cout << "Please place your bet." << std::endl;
-	std::cin >> bet;
-
-	//convert input to a vector of ints
-	vector<int> numbers;
-	std::istringstream split(bet);
-	string number;
-	while (getline(split, number, ','))
-	{
-		int value = std::atoi(number.c_str());
-		numbers.push_back(value);
-	}
-
-	return numbers;
+	return RD.CheckDice();
 }

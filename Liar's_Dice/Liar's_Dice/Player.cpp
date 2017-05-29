@@ -23,6 +23,7 @@ int Player::getAmountOfDice()
 	return dice;
 }
 
+/*UNUSED FUNCTION
 void Player::rollDice(int amountOfDice)
 {
 	vector<int> cup = {};
@@ -32,13 +33,20 @@ void Player::rollDice(int amountOfDice)
 		cup.push_back(rand() % 6 + 1);
 	}
 	diceCup = cup;
-}
+}*/
 
-void Player::reduceDice() {
+void Player::reduceDice() 
+{
 	dice--;
 }
 
-vector<int> Player::getDice() {
+void Player::setDice(vector<int> dice)
+{
+	diceCup = dice;
+}
+
+vector<int> Player::getDice() 
+{
 	return diceCup;
 }
 
