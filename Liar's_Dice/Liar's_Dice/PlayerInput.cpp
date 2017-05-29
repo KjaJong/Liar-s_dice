@@ -1,10 +1,7 @@
 #include "PlayerInput.h"
 #include <opencv2\opencv.hpp>
-#include "opencv2/imgproc/imgproc.hpp" 
 #include "opencv2/highgui/highgui.hpp"
 #include <iostream>
-#include <sstream>
-#include <string>
 
 using namespace cv;
 
@@ -20,7 +17,7 @@ PlayerInput::~PlayerInput()
 {
 }
 
-int PlayerInput::captureInput()
+int captureInput()
 {
 	VideoCapture cap(1);
 

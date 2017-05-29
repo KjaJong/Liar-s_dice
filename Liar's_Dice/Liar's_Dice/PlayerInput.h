@@ -6,7 +6,6 @@ class PlayerInput
 public:
 	PlayerInput();
 	~PlayerInput();
-	int captureInput();
 	cv::Mat getPicture();
 };
 
