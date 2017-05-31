@@ -1,19 +1,37 @@
 #include <iostream>
 #include <vector>
 #include <string>
+#include <thread>
+#include <future>
 #include "Player.h"
 #include "GameController.h"
+#include "GameWorld.h"
 
 using std::vector;
 using std::string;
+using std::thread;
+using std::async;
+using std::future;
 
 vector<Player> initPlayers();
 void gameLoop(vector<Player> players);
+void gameWorld(int argc, char* argv[]);
+
+GameWorld GW = GameWorld();
 
 int main(int argc, char* argv[])
 {
-	gameLoop(initPlayers());
+	//TODO start multithreading
 
+	//Starts the gameworld thread
+	future<void> gameWorldThread = async(gameWorld, argc, argv);
+	std::cout << "2" << std::endl;
+
+	//Starts the game loop thread
+	future<void> gameLoopThread = async(gameLoop, initPlayers());
+	std::cout << "1" << std::endl;
+
+	std::cout << "The gameloop and game world threads are now running." << std::endl;
 	system("pause");
 	return 0;
 }
@@ -56,4 +74,9 @@ void gameLoop(vector<Player> players)
 	//Would start the game loop and handle ending the game.
 	//In the final product, this would switch the start screen to the game
 	//After that, this will do squat untill the game ends (and after that, i don't know).
+}
+
+void gameWorld(int argc, char* argv[])
+{
+	GW.startGlut(argc, argv);
 }

@@ -21,16 +21,6 @@ void keyboard(unsigned char key, int x, int y)
 		case 27: //escape
 			exit(0);
 
-		//case 9:
-		//	characterView[1]++; //horz tab to go up
-		//	std::cout << characterView[1] << std::endl;
-		//	break;
-
-		//case 32:
-		//	characterView[1]--; //space to go down
-		//	std::cout << characterView[1] << std::endl;
-		//	break;
-
 	default:
 		std::cout << "Key not recognized" << std::endl;
 		break;
@@ -41,8 +31,6 @@ void display()
 {
 	glClearColor(0.5f, 0.5f, 0.7f, 1.0f); //Background colour, now purple
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-	//Copied code, document the use of the important parts
 
 	//Sets the matrix for the projection. By calling you are setting (in order): The field of view, the aspect ratio of the
 	//screen, the distance to the near plane (always < 0) and the distance to the far plane.
@@ -68,7 +56,6 @@ void display()
 int lastKnownTime = 0;
 void idle()
 {
-	//And to make a 'timer' which rotates the model. It can be slowed down or sped up by dividing or multipling with 
 	int currentTime = glutGet(GLUT_ELAPSED_TIME);
 	float deltaTime = (float)(currentTime - lastKnownTime);
 	lastKnownTime = currentTime;
@@ -76,7 +63,7 @@ void idle()
 	glutPostRedisplay();
 }
 
-int main(int argc, char* argv[])
+void GameWorld::startGlut(int argc, char* argv[])
 {
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
 	glutInitWindowSize(screenWidth, screenHeight);
@@ -96,5 +83,4 @@ int main(int argc, char* argv[])
 
 	//Last call, this starts all processes.
 	glutMainLoop();
-	return 0;
 }
