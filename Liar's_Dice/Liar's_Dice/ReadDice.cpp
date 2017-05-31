@@ -57,19 +57,19 @@ std::vector<int> ReadDice::CheckDice()
 	vector<int> dice;
 
 	PlayerInput PI = PlayerInput();
-	//Mat pic = PI.getPicture();
-	Mat pic = cv::imread("C:/Users/Tom Remeeus/Documents/GitHub/Liar-s_dice/Liar's_Dice/DicePics/test2.jpg", 1);
+	Mat pic = PI.getPicture();
+	//Mat pic = cv::imread("C:/Users/Tom Remeeus/Documents/GitHub/Liar-s_dice/Liar's_Dice/DicePics/test2.jpg", 1);
 	Mat buffer = pic;
 
 	//edit picture
 	cvtColor(buffer, buffer, CV_BGR2GRAY);
-	threshold(buffer, buffer, 125, 255, CV_THRESH_BINARY);
+	threshold(buffer, buffer, 200, 255, CV_THRESH_BINARY);
 
-	/*TEST
-	//cv::namedWindow("test", CV_WINDOW_AUTOSIZE);
-	//imshow("test", pic);
-	//cv::waitKey(0);
-	END TEST*/
+	//TEST
+	cv::namedWindow("test", CV_WINDOW_AUTOSIZE);
+	imshow("test", buffer);
+	cv::waitKey(0);
+	//END TEST
 
 	//detect dice
 	vector<vector<Point> > contours;
@@ -82,7 +82,7 @@ std::vector<int> ReadDice::CheckDice()
 		double diceContourArea = contourArea(contours[i]);
 
 		//filter small contours 
-		if (diceContourArea > 6000)
+		if (diceContourArea > 400)
 		{
 			//get bounding rect
 			cv::Rect diceBoundsRect = boundingRect(Mat(contours[i]));
@@ -90,18 +90,22 @@ std::vector<int> ReadDice::CheckDice()
 
 			//edit dice picture
 			cvtColor(dicePic, dicePic, CV_BGR2GRAY);
-			threshold(dicePic, dicePic, 150, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
-			Canny(dicePic, dicePic, 2, 2*2, 3, false);
+			threshold(dicePic, dicePic, 100, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
+			Canny(dicePic, dicePic, 0, 255, 3, false);
 
-			/*TEST
+			//TEST
 			cv::namedWindow("void", CV_WINDOW_AUTOSIZE);
 			imshow("void", dicePic);
 			cv::waitKey(0);
-			END TEST*/
+			//END TEST
 
 			//count number of pips and add dice to vector
 			int pips = countPips(dicePic);
 			dice.push_back(pips);
+
+			//TEST
+			std::cout << pips << std::endl;
+			//END TEST
 		}
 	}
 

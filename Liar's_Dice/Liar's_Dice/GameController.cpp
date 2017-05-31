@@ -101,17 +101,18 @@ void GameController::deletePlayer(int index)
 
 void GameController::turn()
 {
-	int choice;
+	std::cout << "Place one die and press enter if you are ready." << std::endl;
+	std::cout << "Set die value 1 to raise current bid" << std::endl;
+	std::cout << "Set die value 2 to call spot on" << std::endl;
+	std::cout << "Set die value 3 to call bluff" << std::endl;
+	system("pause");
 
-	std::cout << "Choose an action:" << std::endl;
-	std::cout << "*Press 1 to raise current bid" << std::endl;
-	std::cout << "*Press 2 to call spot on" << std::endl;
-	std::cout << "*Press 3 to call bluff" << std::endl;
+	vector<int> dice = RD.CheckDice();
 
-	std::cin >> choice;
-
-	switch (choice)
+	if (dice.size() == 1)
 	{
+		switch (dice[0])
+		{
 		case 1:
 			raise();
 			break;
@@ -125,6 +126,12 @@ void GameController::turn()
 			std::cout << "Key not recognized." << std::endl;
 			turn();
 			break;
+		}
+	}
+	else
+	{
+		std::cout << "Place place one die." << std::endl;
+		turn();
 	}
 }
 
@@ -155,11 +162,10 @@ void GameController::rollDice()
 
 void GameController::raise()
 {
-	bool check;
+	vector<int> newBid = setBet();
 
-	//TODO check if the raise is possible anyway
-	vector<int> newBid = RD.CheckDice();
-	check = LH.raise(&curBid, &newBid);
+	//check if new bid is possible
+	bool check = LH.raise(&curBid, &newBid);
 
 	if (check)
 	{
@@ -209,8 +215,10 @@ void GameController::spotOn()
 	}
 }
 
-
 vector<int> GameController::setBet()
 {
+	std::cout << "Use your dice to place a bid and press enter if you are ready." << std::endl;
+	system("pause");
+
 	return RD.CheckDice();
 }
