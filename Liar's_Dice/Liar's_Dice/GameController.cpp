@@ -107,7 +107,7 @@ void GameController::turn()
 	std::cout << "Set die value 3 to call bluff" << std::endl;
 	system("pause");
 
-	vector<int> dice = RD.CheckDice();
+	vector<int> dice = RD.CheckDice(1);
 
 	if (dice.size() == 1)
 	{
@@ -146,7 +146,7 @@ void GameController::rollDice()
 		//set new dice vector
 		std::cout << "Throw your dice and press enter." << std::endl;
 		system("pause");
-		vector<int> diceList = RD.CheckDice();
+		vector<int> diceList = RD.CheckDice(diceAmount);
 
 		if (diceList.size() == diceAmount)
 		{
@@ -217,8 +217,8 @@ void GameController::spotOn()
 
 vector<int> GameController::setBet()
 {
-	std::cout << "Use your dice to place a bid and press enter if you are ready." << std::endl;
+	std::cout << "Use your dice to place a bid and press enter if you are ready. Please make sure there is a gap between the dice." << std::endl;
 	system("pause");
 
-	return RD.CheckDice();
+	return RD.CheckDice(0);
 }

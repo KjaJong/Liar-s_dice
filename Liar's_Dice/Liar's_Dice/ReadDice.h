@@ -7,6 +7,6 @@ class ReadDice
 public:
 	ReadDice();
 	~ReadDice();
-	std::vector<int> CheckDice();
+	std::vector<int> CheckDice(int amount);
 };
 
