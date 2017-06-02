@@ -34,7 +34,7 @@ void GameController::pickFirstPlayer()
 	curPlayer = pick - 1;
 	
 	std::cout << "Player " << players[curPlayer].getName() << " has to begin the game." << std::endl;
-	curBid = setBet();
+	raise();
 }
 
 void GameController::pickFirstPlayer(int player)
@@ -46,7 +46,7 @@ void GameController::pickFirstPlayer(int player)
 	rollDice();
 
 	std::cout << "Player " << players[curPlayer].getName() << " has to begin the game." << std::endl;
-	curBid = setBet();
+	raise();
 }
 
 void GameController::pickNextPlayer()
@@ -162,23 +162,44 @@ void GameController::rollDice()
 
 void GameController::raise()
 {
-	vector<int> newBid = setBet();
+	vector<int> read = setBet();
+	vector<int> newBid;
 
-	//check if new bid is possible
-	bool check = LH.raise(&curBid, &newBid);
-
-	if (check)
+	//check if the correct amount of dice is thrown
+	if (read.size() == 2)
 	{
-		//set new current bid
-		std::cout << "New bid accepted." << std::endl;
-		curBid = newBid;
+		//TEST
+		std::cout << "adding: " << read[0] << " " << read[1] << "'s" << std::endl;
+		//END TEST
+
+		for (int i = 0; i < read[0]; i++)
+		{
+			newBid.push_back(read[1]);
+		}
+
+		//check if new bid is possible
+		bool check = LH.raise(&curBid, &newBid);
+
+		if (check)
+		{
+			//set new current bid
+			std::cout << "New bid accepted." << std::endl;
+			curBid = newBid;
+		}
+		else
+		{
+			//let the user bid again if last bid is incorrect
+			std::cout << "Make sure your new bid is higher than the last bid." << std::endl;
+			raise();
+		}
 	}
 	else
 	{
 		//let the user bid again if last bid is incorrect
-		std::cout << "Make sure your new bid is higher than the last bid" << std::endl;
+		std::cout << "Make sure you throw the correct amount of dice." << std::endl;
 		raise();
 	}
+	
 }
 
 //Method called when callBluff is selected. This removes a dice from either the previous player(true) or the current player(false).

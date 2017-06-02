@@ -19,6 +19,9 @@ bool LogicHandler::raise(const vector<int>* lastBid, const vector<int>* newBid)
 	//check if newBid contains out of the same values
 	if (!sameValues(newBid)) return false;
 
+	//check if lastBid is empty AKA first bid in game
+	if (lastBid == nullptr) return true;
+
 	//check if the new value of eyes is higher
 	if (lastBid[0] < newBid[0]) return true;
 
