@@ -2,15 +2,18 @@
 #include "Player.h"
 #include "LogicHandler.h"
 #include "ReadDice.h"
+#include <irrKlang.h>
 #include <iostream>
 #include <vector>
 #include <string>
 
 using std::vector;
 using std::string;
+using namespace irrklang;
 
 LogicHandler LH;
 ReadDice RD;
+ISoundEngine* sound;
 
 int previousPlayer;
 vector<int> curBid;
@@ -20,6 +23,10 @@ GameController::GameController(vector<Player> list)
 	players = list;
 	LH = LogicHandler();
 	RD = ReadDice();
+	sound = createIrrKlangDevice();
+
+	//
+	sound->play2D("", true);
 }
 
 GameController::~GameController()
@@ -101,6 +108,10 @@ void GameController::deletePlayer(int index)
 
 void GameController::turn()
 {
+	//TEMP
+	sound->play2D("C:/Users/Tom Remeeus/Documents/GitHub/Liar-s_dice/Liar's_Dice/Liar's_Dice/media/sfx/wrong/Losing horn.mp3", false);
+	//END TEMP
+
 	std::cout << "Place one die and press enter if you are ready." << std::endl;
 	std::cout << "Set die value 1 to raise current bid" << std::endl;
 	std::cout << "Set die value 2 to call spot on" << std::endl;
