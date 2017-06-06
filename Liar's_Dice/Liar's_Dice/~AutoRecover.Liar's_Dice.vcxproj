@@ -88,13 +88,10 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)freeglut/include;$(ProjectDir)opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)freeglut/lib;$(ProjectDir)opencv\build\x64\vc14\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opencv_world320.lib;opencv_world320d.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -109,7 +106,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)freeglut/lib/x64;$(ProjectDir)opencv\build\x64\vc14\lib</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>$(ProjectDir)freeglut/lib;$(ProjectDir)opencv\build\x64\vc14\lib</AdditionalLibraryDirectories>
       <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opencv_world320.lib;opencv_world320d.lib;freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -139,15 +136,12 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(ProjectDir)opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>$(ProjectDir)opencv\build\x64\vc14\lib</AdditionalLibraryDirectories>
-      <AdditionalDependencies>kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;opencv_world320.lib;opencv_world320d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -157,7 +151,6 @@
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Main.cpp" />
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Player.cpp" />
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\PlayerInput.cpp" />
-    <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\ReadDice.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\GameController.h" />
@@ -165,7 +158,6 @@
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\LogicHandler.h" />
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Player.h" />
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\PlayerInput.h" />
-    <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\ReadDice.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\Liar%27s_Dice\DicePics\IMG_20170516_174740.jpg" />
