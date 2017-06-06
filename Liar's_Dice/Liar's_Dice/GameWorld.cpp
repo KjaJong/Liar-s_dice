@@ -88,7 +88,7 @@ void GameWorld::startGlut(int argc, char* argv[])
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE);
 	glutInitWindowSize(screenWidth, screenHeight);
 	glutInit(&argc, argv);
-	glutCreateWindow("ComputerGraphics wk1");
+	glutCreateWindow("Liar's dice");
 
 	initModels();
 	
