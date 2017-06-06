@@ -59,7 +59,10 @@ void display()
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	gluLookAt(0, models[currentModel].first*1.1, models[currentModel].first * 2, 0,0, 0, 0, 1,0);
+	gluLookAt(
+	0, models[currentModel].first*1.1, models[currentModel].first * 2, 
+	0, 0, 0, 
+	0, 1, 0);
 
 	glRotatef(rotation, 0, 1, 0);
 	models[currentModel].second->draw();
