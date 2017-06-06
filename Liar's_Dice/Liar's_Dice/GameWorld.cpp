@@ -1,9 +1,14 @@
 #include "GameWorld.h"
 #include <GL/freeglut.h>
 #include <iostream>
+#include "ObjModel.h"
 
 int screenWidth = 1200;
 int screenHeight = 800;
+
+float rotation = 0;
+std::vector<std::pair<int, ObjModel*> > models;
+int currentModel = 0;
 
 GameWorld::GameWorld()
 {
@@ -27,6 +32,15 @@ void keyboard(unsigned char key, int x, int y)
 	}
 }
 
+void initModels(void)
+{
+	glEnable(GL_DEPTH_TEST);
+
+	models.push_back(std::pair<int, ObjModel*>(10, new ObjModel("models/DiceOBJ/DiceLowpoly.obj")));
+	models.push_back(std::pair<int, ObjModel*>(1, new ObjModel("models/cup/cup.obj")));
+
+}
+
 void display()
 {
 	glClearColor(0.5f, 0.5f, 0.7f, 1.0f); //Background colour, now purple
@@ -46,10 +60,13 @@ void display()
 	glLoadIdentity();
 
 	gluLookAt(
-		0, 0, 0,
-		0, 0, 0,
-		8, 1, 0);
+	0, models[currentModel].first*1.1, models[currentModel].first * 2, 
+	0, 0, 0, 
+	0, 1, 0);
 
+	glRotatef(rotation, 0, 1, 0);
+	models[currentModel].second->draw();
+	
 	glutSwapBuffers();
 }
 
@@ -59,7 +76,10 @@ void idle()
 	int currentTime = glutGet(GLUT_ELAPSED_TIME);
 	float deltaTime = (float)(currentTime - lastKnownTime);
 	lastKnownTime = currentTime;
-
+	
+	//Wheeee!!!
+	rotation += 0.25f;
+	
 	glutPostRedisplay();
 }
 
@@ -70,6 +90,8 @@ void GameWorld::startGlut(int argc, char* argv[])
 	glutInit(&argc, argv);
 	glutCreateWindow("ComputerGraphics wk1");
 
+	initModels();
+	
 	//All function bound to glut
 	glutDisplayFunc(display);
 	glutIdleFunc(idle);
