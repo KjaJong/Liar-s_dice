@@ -52,56 +52,182 @@ int countPips(Mat area)
 	return keypoints.size();
 }
 
-std::vector<int> ReadDice::CheckDice()
+//take a picture and check the contours for dice. If player is setting a bid, make sure to set the int amount to 0.
+std::vector<int> ReadDice::CheckDice(int amount)
 {
 	vector<int> dice;
+	int count;
 
 	PlayerInput PI = PlayerInput();
-	//Mat pic = PI.getPicture();
-	Mat pic = cv::imread("C:/Users/Tom Remeeus/Documents/GitHub/Liar-s_dice/Liar's_Dice/DicePics/test2.jpg", 1);
-	Mat buffer = pic;
+	Mat pic = PI.getPicture();
+	int minThresh = 50;
 
-	//edit picture
-	cvtColor(buffer, buffer, CV_BGR2GRAY);
-	threshold(buffer, buffer, 125, 255, CV_THRESH_BINARY);
-
-	/*TEST
-	//cv::namedWindow("test", CV_WINDOW_AUTOSIZE);
-	//imshow("test", pic);
-	//cv::waitKey(0);
-	END TEST*/
-
-	//detect dice
-	vector<vector<Point> > contours;
-	vector<cv::Vec4i> hierarchy;
-	findContours(buffer, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
-	
-	//iterate over dice contours
-	for (int i = 0; i < contours.size(); i++)
+	//read bet
+	if (amount == 0)
 	{
-		double diceContourArea = contourArea(contours[i]);
-
-		//filter small contours 
-		if (diceContourArea > 6000)
+		while (true)
 		{
-			//get bounding rect
-			cv::Rect diceBoundsRect = boundingRect(Mat(contours[i]));
-			Mat dicePic = pic(diceBoundsRect);
+			Mat buffer = pic;
+			count = 0;
 
-			//edit dice picture
-			cvtColor(dicePic, dicePic, CV_BGR2GRAY);
-			threshold(dicePic, dicePic, 150, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
-			Canny(dicePic, dicePic, 2, 2*2, 3, false);
+			//edit picture
+			cvtColor(buffer, buffer, CV_BGR2GRAY);
+			threshold(buffer, buffer, minThresh, 255, CV_THRESH_BINARY);
 
-			/*TEST
-			cv::namedWindow("void", CV_WINDOW_AUTOSIZE);
-			imshow("void", dicePic);
-			cv::waitKey(0);
-			END TEST*/
+			//TEST
+			//cv::namedWindow("test", CV_WINDOW_AUTOSIZE);
+			//imshow("test", buffer);
+			//cv::waitKey(0);
+			//END TEST
 
-			//count number of pips and add dice to vector
-			int pips = countPips(dicePic);
-			dice.push_back(pips);
+			//detect dice
+			vector<vector<Point> > contours;
+			vector<cv::Vec4i> hierarchy;
+			findContours(buffer, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
+
+			for (int i = 0; i < contours.size(); i++)
+			{
+				double area = contourArea(contours[i]);
+
+				if (area > 400 && area < 1200)
+				{
+					//TEST
+					std::cout << "area size: " << area << std::endl;
+					//END TEST
+
+					count++;
+				}
+			}
+
+			if (count == 2)
+			{
+				//iterate over dice contours
+				for (int i = 0; i < contours.size(); i++)
+				{
+					double diceContourArea = contourArea(contours[i]);
+
+					//filter small contours 
+					if (diceContourArea > 400 && diceContourArea < 1200)
+					{
+						//get bounding rect
+						cv::Rect diceBoundsRect = boundingRect(Mat(contours[i]));
+						Mat dicePic = pic(diceBoundsRect);
+
+						//edit dice picture
+						cvtColor(dicePic, dicePic, CV_BGR2GRAY);
+						threshold(dicePic, dicePic, 180, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
+						Canny(dicePic, dicePic, 0, 255, 3, false);
+
+						//TEST
+						//cv::namedWindow("void", CV_WINDOW_AUTOSIZE);
+						//imshow("void", dicePic);
+						//cv::waitKey(0);
+						//END TEST
+
+						//count number of pips and add dice to vector
+						int pips = countPips(dicePic);
+						dice.push_back(pips);
+
+						//TEST
+						std::cout << pips << std::endl;
+						//END TEST
+					}
+				}
+
+				break;
+			}
+			if (minThresh >= 255)
+			{
+				break;
+			}
+			else
+			{
+				minThresh = minThresh + 5;
+			}
+		}
+	}
+	//read dice
+	else
+	{
+		while (true)
+		{
+			Mat buffer = pic;
+			count = 0;
+
+			//edit picture
+			cvtColor(buffer, buffer, CV_BGR2GRAY);
+			threshold(buffer, buffer, minThresh, 255, CV_THRESH_BINARY);
+
+			//TEST
+			//cv::namedWindow("test", CV_WINDOW_AUTOSIZE);
+			//imshow("test", buffer);
+			//cv::waitKey(0);
+			//END TEST
+
+			//detect dice
+			vector<vector<Point> > contours;
+			vector<cv::Vec4i> hierarchy;
+			findContours(buffer, contours, hierarchy, CV_RETR_TREE, CV_CHAIN_APPROX_SIMPLE);
+
+			for (int i = 0; i < contours.size(); i++)
+			{
+				double area = contourArea(contours[i]);
+
+				if (area > 400 && area < 1200)
+				{
+					//TEST
+					std::cout << "area size: " << area << std::endl;
+					//END TEST
+
+					count++;
+				}
+			}
+
+			if (count == amount)
+			{
+				//iterate over dice contours
+				for (int i = 0; i < contours.size(); i++)
+				{
+					double diceContourArea = contourArea(contours[i]);
+
+					//filter small contours 
+					if (diceContourArea > 400 && diceContourArea < 1200)
+					{
+						//get bounding rect
+						cv::Rect diceBoundsRect = boundingRect(Mat(contours[i]));
+						Mat dicePic = pic(diceBoundsRect);
+
+						//edit dice picture
+						cvtColor(dicePic, dicePic, CV_BGR2GRAY);
+						threshold(dicePic, dicePic, 180, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
+						Canny(dicePic, dicePic, 0, 255, 3, false);
+
+						//TEST
+						//cv::namedWindow("die", CV_WINDOW_AUTOSIZE);
+						//imshow("die", dicePic);
+						//cv::waitKey(0);
+						//END TEST
+
+						//count number of pips and add dice to vector
+						int pips = countPips(dicePic);
+						dice.push_back(pips);
+
+						//TEST
+						std::cout << pips << std::endl;
+						//END TEST
+					}
+				}
+
+				break;
+			}
+			if (minThresh >= 255)
+			{
+				break;
+			}
+			else
+			{
+				minThresh = minThresh + 5;
+			}
 		}
 	}
 

@@ -19,7 +19,7 @@ PlayerInput::~PlayerInput()
 
 int captureInput()
 {
-	VideoCapture cap(1);
+	VideoCapture cap(0);
 
 	// Controle of de camera wordt herkend.
 	if (!cap.isOpened())
@@ -28,8 +28,12 @@ int captureInput()
 		return -1;
 	}
  
-	double dWidth = cap.get(CV_CAP_PROP_FRAME_WIDTH);
-	double dHeight = cap.get(CV_CAP_PROP_FRAME_HEIGHT);
+	//double dWidth = cap.get(CV_CAP_PROP_FRAME_WIDTH);
+	//double dHeight = cap.get(CV_CAP_PROP_FRAME_HEIGHT);
+
+	double dWidth = 1920;
+	double dHeight = 1080;
+
 	std::cout << "Frame size : " << dWidth << " x " << dHeight << std::endl;
 
 
