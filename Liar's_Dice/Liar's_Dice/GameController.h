@@ -18,7 +18,15 @@ private:
 	void raise();
 	void callBluff();
 	void spotOn();
-	
+	void setWinSFX();
+	void setLoseSFX();
+	void setGOSFX();
+	void setMusic();
+	void playWinSFX();
+	void playLoseSFX();
+	void playGOSFX();
+	void playMusic();
+
 public:
 	GameController(vector<Player> players);
 	~GameController();

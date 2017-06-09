@@ -36,9 +36,9 @@ int countPips(Mat area)
 	floodFill(dice, cv::Point(149, 149), cv::Scalar(255));
 
 	//TEST
-	//cv::namedWindow("void", CV_WINDOW_AUTOSIZE);
-	//imshow("void", dice);
-	//cv::waitKey(0);
+	cv::namedWindow("void", CV_WINDOW_AUTOSIZE);
+	imshow("void", dice);
+	cv::waitKey(0);
 	//END TEST
 
 	//search for blobs
@@ -95,7 +95,7 @@ std::vector<int> ReadDice::CheckDice(int amount)
 			{
 				double area = contourArea(contours[i]);
 
-				if (area > 1000 && area < 2600)
+				if (area > 600 && area < 1400)
 				{
 					//TEST
 					//std::cout << "area size: " << area << std::endl;
@@ -113,7 +113,7 @@ std::vector<int> ReadDice::CheckDice(int amount)
 					double diceContourArea = contourArea(contours[i]);
 
 					//filter small contours 
-					if (diceContourArea > 1000 && diceContourArea < 2600)
+					if (diceContourArea > 600 && diceContourArea < 1400)
 					{
 						//get bounding rect
 						cv::Rect diceBoundsRect = boundingRect(Mat(contours[i]));
@@ -132,11 +132,15 @@ std::vector<int> ReadDice::CheckDice(int amount)
 
 						//count number of pips and add dice to vector
 						int pips = countPips(dicePic);
-						dice.push_back(pips);
 
-						//TEST
-						std::cout << pips << std::endl;
-						//END TEST
+						if (pips > 0 && pips < 7)
+						{
+							dice.push_back(pips);
+
+							//TEST
+							std::cout << pips << std::endl;
+							//END TEST
+						}
 					}
 				}
 
@@ -179,10 +183,11 @@ std::vector<int> ReadDice::CheckDice(int amount)
 			{
 				double area = contourArea(contours[i]);
 
-				if (area > 1000 && area < 2600)
+				if (area > 600 && area < 1400)
 				{
 					//TEST
-					//std::cout << "area size: " << area << std::endl;
+					std::cout << "area size: " << area << std::endl;
+					std::cout << "" << std::endl;
 					//END TEST
 
 					count++;
@@ -197,7 +202,7 @@ std::vector<int> ReadDice::CheckDice(int amount)
 					double diceContourArea = contourArea(contours[i]);
 
 					//filter small contours 
-					if (diceContourArea > 1000 && diceContourArea < 2600)
+					if (diceContourArea > 600 && diceContourArea < 1400)
 					{
 						//get bounding rect
 						cv::Rect diceBoundsRect = boundingRect(Mat(contours[i]));
@@ -216,11 +221,15 @@ std::vector<int> ReadDice::CheckDice(int amount)
 
 						//count number of pips and add dice to vector
 						int pips = countPips(dicePic);
-						dice.push_back(pips);
+						
+						if (pips > 0 && pips < 7)
+						{
+							dice.push_back(pips);
 
-						//TEST
-						std::cout << pips << std::endl;
-						//END TEST
+							//TEST
+							std::cout << pips << std::endl;
+							//END TEST
+						}
 					}
 				}
 
