@@ -151,16 +151,20 @@
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\GameController.cpp" />
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\LogicHandler.cpp" />
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Main.cpp" />
+    <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Music.cpp" />
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Player.cpp" />
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\PlayerInput.cpp" />
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\ReadDice.cpp" />
+    <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\SFX.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\GameController.h" />
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\LogicHandler.h" />
+    <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Music.h" />
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Player.h" />
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\PlayerInput.h" />
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\ReadDice.h" />
+    <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\SFX.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\..\Liar%27s_Dice\DicePics\IMG_20170516_174740.jpg" />
