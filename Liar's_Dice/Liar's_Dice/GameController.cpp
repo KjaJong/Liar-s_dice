@@ -138,6 +138,9 @@ void GameController::turn()
 
 void GameController::rollDice()
 {
+	//set curbid to null
+	curBid.clear();
+
 	for (int i = 0; i < players.size(); i++)
 	{
 		//check amount of dice
