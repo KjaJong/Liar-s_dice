@@ -84,3 +84,20 @@ void GameWorld::startGlut(int argc, char* argv[])
 	//Last call, this starts all processes.
 	glutMainLoop();
 }
+
+void GameWorld::animateRollDice(Player player)
+{
+
+}
+
+void GameWorld::animateSpotOn(bool isSpotOn)
+{
+
+}
+
+void GameWorld::animteCallBluff(bool isBluff)
+{
+
+}
+
+
