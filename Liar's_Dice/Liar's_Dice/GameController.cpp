@@ -4,9 +4,9 @@
 #include "ReadDice.h"
 #include <irrKlang.h>
 #include <iostream>
-#include <thread>
 #include <vector>
 #include <string>
+#include <thread>
 
 using std::vector;
 using std::string;
@@ -19,10 +19,6 @@ ISoundEngine *SFXEngine;
 
 int previousPlayer;
 vector<int> curBid;
-vector<string> winSFX;
-vector<string> loseSFX;
-vector<string> GOSFX;
-vector<string> music;
 
 GameController::GameController(vector<Player> list)
 {
@@ -31,10 +27,6 @@ GameController::GameController(vector<Player> list)
 	LH = LogicHandler();
 	RD = ReadDice();
 	SFXEngine = createIrrKlangDevice();
-	setWinSFX();
-	setLoseSFX();
-	setGOSFX();
-	setMusic();
 }
 
 GameController::~GameController()
@@ -112,7 +104,7 @@ void GameController::deletePlayer(int index)
 {
 	std::cout << "Player " << players[index].getName() <<  " is out of dice." << std::endl;
 	players.erase(players.begin() + index);
-	playGOSFX();
+	playGOSFX(getGOSFX());
 }
 
 void GameController::turn()
@@ -226,13 +218,13 @@ void GameController::callBluff()
 	//check if bluff is correct
 	if(LH.callBluff(&playerDice, &curBid))
 	{
-		playWinSFX();
+		playWinSFX(getWinSFX());
 		players[previousPlayer].reduceDice();
 		pickFirstPlayer(previousPlayer);
 	}
 	else
 	{
-		playLoseSFX();
+		playLoseSFX(getLoseSFX());
 		players[curPlayer].reduceDice();
 		pickFirstPlayer(curPlayer);
 	}
@@ -246,13 +238,13 @@ void GameController::spotOn()
 	//check if spoton is correct
 	if(LH.spotOn(&playerDice, &curBid))
 	{
-		playWinSFX();
+		playWinSFX(getWinSFX());
 		for (int i = 0; i < players.size(); i++) { if (i != curPlayer) players[i].reduceDice(); }
 		pickFirstPlayer(curPlayer + 1);
 	}
 	else
 	{
-		playLoseSFX();
+		playLoseSFX(getLoseSFX());
 		players[curPlayer].reduceDice();
 		pickFirstPlayer(curPlayer);
 	}
@@ -267,66 +259,92 @@ vector<int> GameController::setBet()
 }
 
 //correct guess sound effects
-void GameController::setWinSFX()
+vector<string> GameController::getWinSFX()
 {
+	vector<string> winSFX;
+
 	winSFX.push_back("media/sfx/correct/Deez nuts.mp3");
 	winSFX.push_back("media/sfx/correct/Gotcha.mp3");
 	winSFX.push_back("media/sfx/correct/Right ding.mp3");
 	winSFX.push_back("media/sfx/correct/Victory.mp3");
+
+	return winSFX;
 }
 
 //wrong guess sound effects
-void GameController::setLoseSFX()
+vector<string> GameController::getLoseSFX()
 {
+	vector<string> loseSFX;
+
 	loseSFX.push_back("media/sfx/wrong/Losing horn.mp3");
 	loseSFX.push_back("media/sfx/wrong/Fart.mp3");
 	loseSFX.push_back("media/sfx/wrong/Nope.mp3");
 	loseSFX.push_back("media/sfx/wrong/Punch.mp3");
 	loseSFX.push_back("media/sfx/wrong/Wilhelm scream.mp3");
+
+	return loseSFX;
 }
 
 //game over sound effects
-void GameController::setGOSFX()
+vector<string> GameController::getGOSFX()
 {
+	vector<string> GOSFX;
+
 	GOSFX.push_back("media/sfx/game over/Beep.mp3");
 	GOSFX.push_back("media/sfx/game over/Mario.mp3");
 	GOSFX.push_back("media/sfx/game over/PacMan.mp3");
 	GOSFX.push_back("media/sfx/game over/Shutdown.mp3");
+
+	return GOSFX;
 }
 
-void GameController::setMusic()
+vector<string> GameController::getMusic()
 {
+	vector<string> music;
+
 	music.push_back("media/music/Japanese Jazz.mp3");
 	music.push_back("media/music/KSP Build 1.mp3");
+
+	return music;
 }
 
-void GameController::playWinSFX()
+void GameController::playWinSFX(vector<string> files)
 {
+	vector<string> winSFX = files;
 	int random = rand() % winSFX.size() + 1;
 	string sound = winSFX[random];
+
 	SFXEngine->play2D(sound.c_str());
 }
 
-void GameController::playLoseSFX()
+void GameController::playLoseSFX(vector<string> files)
 {
+	vector<string> loseSFX = files;
 	int random = rand() % loseSFX.size() + 1;
 	string sound = loseSFX[random];
+
 	SFXEngine->play2D(sound.c_str());
 }
 
-void GameController::playGOSFX()
+void GameController::playGOSFX(vector<string> files)
 {
+	vector<string> GOSFX = files;
 	int random = rand() % GOSFX.size() + 1;
 	string sound = GOSFX[random];
+
 	SFXEngine->play2D(sound.c_str());
 }
 
-void GameController::playMusic()
+void GameController::playMusic(vector<string> files)
 {
+	vector<string> music = files;
 	ISoundEngine *musicEngine = createIrrKlangDevice();
 	ISound *song;
 	int tracks = music.size();
 	int curTrack = 1;
+
+	//set volume
+	musicEngine->setSoundVolume(0.5f);
 
 	//play first song
 	string track = music[curTrack - 1];

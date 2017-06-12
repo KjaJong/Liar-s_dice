@@ -18,14 +18,14 @@ private:
 	void raise();
 	void callBluff();
 	void spotOn();
-	void setWinSFX();
-	void setLoseSFX();
-	void setGOSFX();
-	void setMusic();
-	void playWinSFX();
-	void playLoseSFX();
-	void playGOSFX();
-	void playMusic();
+	vector<string> getWinSFX();
+	vector<string> getLoseSFX();
+	vector<string> getGOSFX();
+	vector<string> getMusic();
+	void playWinSFX(vector<string> files);
+	void playLoseSFX(vector<string> files);
+	void playGOSFX(vector<string> files);
+	void playMusic(vector<string> files);
 
 public:
 	GameController(vector<Player> players);
