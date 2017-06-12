@@ -2,6 +2,7 @@
 #include "Player.h"
 #include "LogicHandler.h"
 #include "ReadDice.h"
+#include "SFX.h"
 #include <iostream>
 #include <vector>
 #include <string>
@@ -11,6 +12,7 @@ using std::string;
 
 LogicHandler LH;
 ReadDice RD;
+SFX sound;
 
 int previousPlayer;
 vector<int> curBid;
@@ -18,8 +20,6 @@ vector<int> curBid;
 GameController::GameController(vector<Player> list)
 {
 	players = list;
-	LH = LogicHandler();
-	RD = ReadDice();
 }
 
 GameController::~GameController()
@@ -97,6 +97,7 @@ void GameController::deletePlayer(int index)
 {
 	std::cout << "Player " << players[index].getName() <<  " is out of dice." << std::endl;
 	players.erase(players.begin() + index);
+	sound.playGameOver();
 }
 
 void GameController::turn()
@@ -137,6 +138,9 @@ void GameController::turn()
 
 void GameController::rollDice()
 {
+	//set curbid to null
+	curBid.clear();
+
 	for (int i = 0; i < players.size(); i++)
 	{
 		//check amount of dice
@@ -207,13 +211,16 @@ void GameController::callBluff()
 {
 	vector<int> playerDice = players[previousPlayer].getDice();
 
+	//check if bluff is correct
 	if(LH.callBluff(&playerDice, &curBid))
 	{
+		sound.playWin();
 		players[previousPlayer].reduceDice();
 		pickFirstPlayer(previousPlayer);
 	}
 	else
 	{
+		sound.playLose();
 		players[curPlayer].reduceDice();
 		pickFirstPlayer(curPlayer);
 	}
@@ -224,13 +231,16 @@ void GameController::spotOn()
 {
 	vector<int> playerDice = players[previousPlayer].getDice();
 
+	//check if spoton is correct
 	if(LH.spotOn(&playerDice, &curBid))
 	{
+		sound.playWin();
 		for (int i = 0; i < players.size(); i++) { if (i != curPlayer) players[i].reduceDice(); }
 		pickFirstPlayer(curPlayer + 1);
 	}
 	else
 	{
+		sound.playLose();
 		players[curPlayer].reduceDice();
 		pickFirstPlayer(curPlayer);
 	}
