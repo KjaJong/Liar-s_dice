@@ -37,6 +37,16 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Music.cpp">
+    <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\GameWorld.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\ObjModel.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Vec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -60,6 +70,19 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Music.h">
+    <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\GameWorld.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\ObjModel.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\stb_image.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Vec.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

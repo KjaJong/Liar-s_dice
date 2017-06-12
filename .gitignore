@@ -2,7 +2,6 @@
 *.slo
 *.lo
 *.o
-*.obj
 
 # Precompiled Headers
 *.gch
@@ -38,3 +37,6 @@
 **.log
 Debug/
 opencv/
+**.iobj
+**.ipdb
+**.pdb
