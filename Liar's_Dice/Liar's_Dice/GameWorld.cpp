@@ -3,12 +3,24 @@
 #include <iostream>
 #include "ObjModel.h"
 
+# define M_PI 3.14159265358979323846
+
 int screenWidth = 1200;
 int screenHeight = 800;
 
 float rotation = 0;
 std::vector<std::pair<int, ObjModel*> > models;
 int currentModel = 0;
+
+
+struct Camera {
+	float posX = 0;
+	float posY = 0;
+	float rotX = 0;
+	float rotY = 0;
+} camera;
+
+bool keys[255];
 
 GameWorld::GameWorld()
 {
@@ -19,16 +31,40 @@ GameWorld::~GameWorld()
 {
 }
 
+
 void keyboard(unsigned char key, int x, int y)
 {
+
+	keys[key] = true;
 	switch (key)
 	{
 		case 27: //escape
 			exit(0);
 
 	default:
-		std::cout << "Key not recognized" << std::endl;
+		std::cout << "Key not recognized (key value: " << key << ")" << std::endl;
 		break;
+	}
+}
+
+void keyboardUp(unsigned char key, int x, int y) 
+{
+	keys[key] = false;
+}
+
+void move(float angle, float fac) {
+	camera.posX += cos((camera.rotY + angle) / 180 * M_PI) * fac;
+	camera.posY += sin((camera.rotY + angle) / 180 * M_PI) * fac;
+}
+
+void mousePasiveMotion(int x, int y) 
+{
+	int dx = x - screenWidth / 2;
+	int dy = y - screenHeight / 2;
+	if ((dx != 0 || dy != 0) && abs(dx) < 100 && abs(dy) < 100) {
+		camera.rotY += dx / 10.0f;
+		camera.rotX += dy / 10.0f;
+		glutWarpPointer(screenWidth / 2, screenHeight / 2);
 	}
 }
 
@@ -58,6 +94,9 @@ void display()
 	//the center of the view (screen?) and the last three set the same for the head (which is to say, now the head is straight up).
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
+	glRotatef(camera.rotX, 1, 0, 0);
+	glRotatef(camera.rotY, 0, 1, 0);
+	glTranslatef(camera.posX, 0, camera.posY);
 
 	gluLookAt(
 	0, models[currentModel].first*1.1, models[currentModel].first * 2, 
@@ -78,7 +117,13 @@ void idle()
 	lastKnownTime = currentTime;
 	
 	//Wheeee!!!
-	rotation += 0.25f;
+
+
+	const float speed = 0.1f;
+	if (keys['a']) move(0, deltaTime*speed);
+	if (keys['d']) move(180, deltaTime*speed);
+	if (keys['w']) move(90, deltaTime*speed);
+	if (keys['s']) move(270, deltaTime*speed);
 	
 	glutPostRedisplay();
 }
@@ -96,6 +141,8 @@ void GameWorld::startGlut(int argc, char* argv[])
 	glutDisplayFunc(display);
 	glutIdleFunc(idle);
 	glutKeyboardFunc(keyboard);
+	glutKeyboardUpFunc(keyboardUp);
+	glutPassiveMotionFunc(mousePasiveMotion);
 
 	//Now initalise all used openGl modules
 	glEnable(GL_DEPTH_TEST);
@@ -107,19 +154,31 @@ void GameWorld::startGlut(int argc, char* argv[])
 	glutMainLoop();
 }
 
+void GameWorld::animateRaise(vector<int> dice)
+{
+	//TODO animte to new bid
+
+	rotation += 45.0f;
+
+}
+
 void GameWorld::animateRollDice(Player player)
 {
-
+	//TODO hugo code
 }
 
 void GameWorld::animateSpotOn(bool isSpotOn)
 {
-
+	//TODO lift dice cup
+	//TODO compare 
+	//TODO results
 }
 
 void GameWorld::animteCallBluff(bool isBluff)
 {
-
+	//TODO lift dice cup
+	//TODO compare 
+	//TODO results
 }
 
 
