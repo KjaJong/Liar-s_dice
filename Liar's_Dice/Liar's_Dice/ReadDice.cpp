@@ -30,9 +30,9 @@ int countPips(Mat area)
 	resize(dice, dice, cv::Size(150, 150));
 
 	//TEST
-	cv::namedWindow("void", CV_WINDOW_AUTOSIZE);
-	imshow("void", dice);
-	cv::waitKey(0);
+	//cv::namedWindow("void", CV_WINDOW_AUTOSIZE);
+	//imshow("void", dice);
+	//cv::waitKey(0);
 	//END TEST
 
 	//set blob parameters

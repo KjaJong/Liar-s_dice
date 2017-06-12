@@ -2,19 +2,20 @@
 #include <irrKlang.h>
 #include <vector>
 #include <string>
+#include <iostream>
 
 using std::vector;
 using std::string;
 using namespace irrklang;
 
 ISoundEngine *SFXEngine;
-vector<string> win;
-vector<string> lose;
-vector<string> gameOver;
 
 SFX::SFX()
 {
 	SFXEngine = createIrrKlangDevice();
+	setWin();
+	setLose();
+	setGameOver();
 }
 
 SFX::~SFX()
@@ -52,8 +53,10 @@ void SFX::setGameOver()
 
 void SFX::playWin()
 {
+	std::cout << win.size() << std::endl;
+
 	int random = rand() % win.size() + 1;
-	string sound = win[random];
+	string sound = win[random - 1];
 
 	SFXEngine->play2D(sound.c_str());
 }
@@ -61,7 +64,7 @@ void SFX::playWin()
 void SFX::playLose()
 {
 	int random = rand() % lose.size() + 1;
-	string sound = lose[random];
+	string sound = lose[random - 1];
 
 	SFXEngine->play2D(sound.c_str());
 }
@@ -69,7 +72,7 @@ void SFX::playLose()
 void SFX::playGameOver()
 {
 	int random = rand() % gameOver.size() + 1;
-	string sound = gameOver[random];
+	string sound = gameOver[random - 1];
 
 	SFXEngine->play2D(sound.c_str());
 }

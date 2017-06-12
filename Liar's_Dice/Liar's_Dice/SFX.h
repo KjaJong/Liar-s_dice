@@ -7,6 +7,10 @@ using std::string;
 class SFX
 {
 private:
+	vector<string> win;
+	vector<string> lose;
+	vector<string> gameOver;
+
 	void setWin();
 	void setLose();
 	void setGameOver();
