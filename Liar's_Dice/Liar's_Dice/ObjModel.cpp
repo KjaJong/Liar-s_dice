@@ -195,6 +195,12 @@ void ObjModel::draw()
 {
 	for (auto group : groups)
 	{
+		glPushMatrix();
+		glRotatef(group->rotations.x], 1, 0, 0);
+		glRotatef(group->rotations.y], 0, 1, 0);
+		glRotatef(group->rotations.z], 0, 0, 1);
+
+
 		auto &material = materials[group->materialIndex];
 
 		glEnable(GL_TEXTURE_2D);
@@ -214,6 +220,7 @@ void ObjModel::draw()
 			}
 		}
 		glEnd();
+		glPopMatrix();
 	}
 }
 

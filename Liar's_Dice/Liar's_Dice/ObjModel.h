@@ -41,6 +41,13 @@ private:
 		std::string name;
 		int materialIndex;
 		std::list<Face> faces;
+		class rotationsf
+		{
+		public:
+			float x;
+			float y;
+			float z;
+		};
 	};
 
 

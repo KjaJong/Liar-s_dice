@@ -10,7 +10,7 @@ int screenHeight = 800;
 
 float rotation = 0;
 std::vector<std::pair<int, ObjModel*> > models;
-int currentModel = 0;
+int currentModel = 2;
 
 
 struct Camera {
@@ -74,6 +74,7 @@ void initModels(void)
 
 	models.push_back(std::pair<int, ObjModel*>(10, new ObjModel("models/DiceOBJ/DiceLowpoly.obj")));
 	models.push_back(std::pair<int, ObjModel*>(1, new ObjModel("models/cup/cup.obj")));
+	models.push_back(std::pair<int, ObjModel*>(1, new ObjModel("models/player/xmasguy.obj")));
 
 }
 
@@ -87,7 +88,7 @@ void display()
 	//Load identity always loads the matrix mode, and should always be called after glMatrixMode.
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(90.0f, screenWidth / (float)screenHeight, 0.1f, 50.0f);
+	gluPerspective(90.0f, screenWidth / (float)screenHeight, 0.1f, 500.0f);
 
 
 	//Sets matrix for the modelview. The first three values set the x, y and z position for the eye. The next three do the same for
@@ -98,10 +99,21 @@ void display()
 	glRotatef(camera.rotY, 0, 1, 0);
 	glTranslatef(camera.posX, 0, camera.posY);
 
-	gluLookAt(
+	/*gluLookAt(
 	0, models[currentModel].first*1.1, models[currentModel].first * 2, 
 	0, 0, 0, 
-	0, 1, 0);
+	0, 1, 0);*/
+	gluLookAt(
+	0,0,5,
+	0,0,0,
+	0,1,0);
+
+	glBegin(GL_QUADS);
+		glVertex3f(-1, 0, 0);
+		glVertex3f(1, 0, 0);
+		glVertex3f(1, 10, 0);
+		glVertex3f(-1, 10, 0);
+	glEnd();
 
 	glRotatef(rotation, 0, 1, 0);
 	models[currentModel].second->draw();
@@ -124,6 +136,8 @@ void idle()
 	if (keys['d']) move(180, deltaTime*speed);
 	if (keys['w']) move(90, deltaTime*speed);
 	if (keys['s']) move(270, deltaTime*speed);
+	if (keys['q']) camera.posY += deltaTime*speed;
+	if (keys['e']) camera.posY -= deltaTime*speed;
 	
 	glutPostRedisplay();
 }
