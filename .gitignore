@@ -37,6 +37,7 @@
 **.log
 Debug/
 opencv/
+irrKlang/
 **.iobj
 **.ipdb
 **.pdb

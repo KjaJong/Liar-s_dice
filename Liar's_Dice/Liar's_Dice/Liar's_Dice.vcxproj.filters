@@ -33,6 +33,12 @@
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\ReadDice.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\SFX.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Music.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\GameWorld.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,7 +51,7 @@
     <ClCompile Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Vec.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
+  </ItemGroup> 
   <ItemGroup>
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Player.h">
       <Filter>Header Files</Filter>
@@ -61,6 +67,12 @@
     </ClInclude>
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\ReadDice.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\SFX.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\Music.h">
+	  <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\..\Liar%27s_Dice\Liar%27s_Dice\GameWorld.h">
       <Filter>Header Files</Filter>
