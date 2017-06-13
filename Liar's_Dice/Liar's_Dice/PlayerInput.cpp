@@ -19,7 +19,7 @@ PlayerInput::~PlayerInput()
 
 int captureInput()
 {
-	VideoCapture cap(1);
+	VideoCapture cap(0);
 
 	// Controle of de camera wordt herkend.
 	if (!cap.isOpened())

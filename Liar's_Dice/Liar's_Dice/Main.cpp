@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "GameController.h"
 #include "GameWorld.h"
+#include "Music.h"
 
 using std::vector;
 using std::string;
@@ -16,8 +17,10 @@ using std::future;
 vector<Player> initPlayers();
 void gameLoop(vector<Player> players);
 void gameWorld(int argc, char* argv[]);
+void gameMusic();
 
-GameWorld GW = GameWorld();
+GameWorld GW;
+Music M;
 
 int main(int argc, char* argv[])
 {
@@ -25,14 +28,13 @@ int main(int argc, char* argv[])
 
 	//Starts the gameworld thread
 	future<void> gameWorldThread = async(gameWorld, argc, argv);
-	std::cout << "2" << std::endl;
+
+	//Starts the game music thread
+	future<void> gameMusicThread = async(gameMusic);
 
 	//Starts the game loop thread
 	future<void> gameLoopThread = async(gameLoop, initPlayers());
-	std::cout << "1" << std::endl;
 
-	std::cout << "The gameloop and game world threads are now running." << std::endl;
-	system("pause");
 	return 0;
 }
 
@@ -79,4 +81,9 @@ void gameLoop(vector<Player> players)
 void gameWorld(int argc, char* argv[])
 {
 	GW.startGlut(argc, argv);
+}
+
+void gameMusic()
+{
+	M.playMusic();
 }

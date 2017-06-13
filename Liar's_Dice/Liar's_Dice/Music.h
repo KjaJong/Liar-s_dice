@@ -7,6 +7,8 @@ using std::string;
 class Music
 {
 private:
+	vector<string> music;
+
 	void setMusic();
 
 public:

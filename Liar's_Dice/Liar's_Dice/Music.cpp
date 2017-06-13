@@ -2,16 +2,15 @@
 #include <irrKlang.h>
 #include <vector>
 #include <string>
+#include <iostream>
 
 using std::vector;
 using std::string;
 using namespace irrklang;
 
-vector<string> music;
-
 Music::Music()
 {
-
+	setMusic();
 }
 
 Music::~Music()
