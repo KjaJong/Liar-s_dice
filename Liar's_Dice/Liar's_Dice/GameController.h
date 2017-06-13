@@ -18,7 +18,7 @@ private:
 	void raise();
 	void callBluff();
 	void spotOn();
-	
+
 public:
 	GameController(vector<Player> players);
 	~GameController();

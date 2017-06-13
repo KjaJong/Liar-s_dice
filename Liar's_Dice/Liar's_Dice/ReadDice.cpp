@@ -27,26 +27,28 @@ ReadDice::~ReadDice()
 int countPips(Mat area)
 {
 	Mat dice = area;
-
 	resize(dice, dice, cv::Size(150, 150));
 
-	floodFill(dice, cv::Point(0, 0), cv::Scalar(255));
-	floodFill(dice, cv::Point(0, 149), cv::Scalar(255));
-	floodFill(dice, cv::Point(149, 0), cv::Scalar(255));
-	floodFill(dice, cv::Point(149, 149), cv::Scalar(255));
+	//TEST
+	//cv::namedWindow("void", CV_WINDOW_AUTOSIZE);
+	//imshow("void", dice);
+	//cv::waitKey(0);
+	//END TEST
 
-	//search for blobs
+	//set blob parameters
 	cv::SimpleBlobDetector::Params params;
+	params.filterByCircularity = true;
+	params.minCircularity = 0.8;
+	
+	//params.filterByArea = true;
+	//params.minArea = 10;
+	//params.maxArea = 25;
 
-	//filter by interia defines how elongated a shape is
-	params.filterByInertia = true;
-	params.minInertiaRatio = 0.5;
-
+	//check for blobs using the parameters
 	std::vector<cv::KeyPoint> keypoints;
-
-	//create blob
 	cv::Ptr<cv::SimpleBlobDetector> blobDetector = cv::SimpleBlobDetector::create(params);
 
+	//count blobs
 	blobDetector->detect(dice, keypoints);
 
 	return keypoints.size();
@@ -60,7 +62,7 @@ std::vector<int> ReadDice::CheckDice(int amount)
 
 	PlayerInput PI = PlayerInput();
 	Mat pic = PI.getPicture();
-	int minThresh = 50;
+	int minThresh = 150;
 
 	//read bet
 	if (amount == 0)
@@ -74,12 +76,6 @@ std::vector<int> ReadDice::CheckDice(int amount)
 			cvtColor(buffer, buffer, CV_BGR2GRAY);
 			threshold(buffer, buffer, minThresh, 255, CV_THRESH_BINARY);
 
-			//TEST
-			//cv::namedWindow("test", CV_WINDOW_AUTOSIZE);
-			//imshow("test", buffer);
-			//cv::waitKey(0);
-			//END TEST
-
 			//detect dice
 			vector<vector<Point> > contours;
 			vector<cv::Vec4i> hierarchy;
@@ -89,12 +85,8 @@ std::vector<int> ReadDice::CheckDice(int amount)
 			{
 				double area = contourArea(contours[i]);
 
-				if (area > 400 && area < 1200)
+				if (area > 600 && area < 1400)
 				{
-					//TEST
-					std::cout << "area size: " << area << std::endl;
-					//END TEST
-
 					count++;
 				}
 			}
@@ -107,30 +99,23 @@ std::vector<int> ReadDice::CheckDice(int amount)
 					double diceContourArea = contourArea(contours[i]);
 
 					//filter small contours 
-					if (diceContourArea > 400 && diceContourArea < 1200)
+					if (diceContourArea > 600 && diceContourArea < 1400)
 					{
 						//get bounding rect
 						cv::Rect diceBoundsRect = boundingRect(Mat(contours[i]));
 						Mat dicePic = pic(diceBoundsRect);
 
-						//edit dice picture
-						cvtColor(dicePic, dicePic, CV_BGR2GRAY);
-						threshold(dicePic, dicePic, 180, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
-						Canny(dicePic, dicePic, 0, 255, 3, false);
-
-						//TEST
-						//cv::namedWindow("void", CV_WINDOW_AUTOSIZE);
-						//imshow("void", dicePic);
-						//cv::waitKey(0);
-						//END TEST
-
 						//count number of pips and add dice to vector
 						int pips = countPips(dicePic);
-						dice.push_back(pips);
 
-						//TEST
-						std::cout << pips << std::endl;
-						//END TEST
+						if (pips > 0 && pips < 7)
+						{
+							dice.push_back(pips);
+
+							//TEST
+							std::cout << pips << std::endl;
+							//END TEST
+						}
 					}
 				}
 
@@ -142,7 +127,7 @@ std::vector<int> ReadDice::CheckDice(int amount)
 			}
 			else
 			{
-				minThresh = minThresh + 5;
+				minThresh = minThresh + 1;
 			}
 		}
 	}
@@ -158,12 +143,6 @@ std::vector<int> ReadDice::CheckDice(int amount)
 			cvtColor(buffer, buffer, CV_BGR2GRAY);
 			threshold(buffer, buffer, minThresh, 255, CV_THRESH_BINARY);
 
-			//TEST
-			//cv::namedWindow("test", CV_WINDOW_AUTOSIZE);
-			//imshow("test", buffer);
-			//cv::waitKey(0);
-			//END TEST
-
 			//detect dice
 			vector<vector<Point> > contours;
 			vector<cv::Vec4i> hierarchy;
@@ -173,12 +152,8 @@ std::vector<int> ReadDice::CheckDice(int amount)
 			{
 				double area = contourArea(contours[i]);
 
-				if (area > 400 && area < 1200)
+				if (area > 600 && area < 1400)
 				{
-					//TEST
-					std::cout << "area size: " << area << std::endl;
-					//END TEST
-
 					count++;
 				}
 			}
@@ -191,30 +166,23 @@ std::vector<int> ReadDice::CheckDice(int amount)
 					double diceContourArea = contourArea(contours[i]);
 
 					//filter small contours 
-					if (diceContourArea > 400 && diceContourArea < 1200)
+					if (diceContourArea > 600 && diceContourArea < 1400)
 					{
 						//get bounding rect
 						cv::Rect diceBoundsRect = boundingRect(Mat(contours[i]));
 						Mat dicePic = pic(diceBoundsRect);
 
-						//edit dice picture
-						cvtColor(dicePic, dicePic, CV_BGR2GRAY);
-						threshold(dicePic, dicePic, 180, 255, CV_THRESH_BINARY | CV_THRESH_OTSU);
-						Canny(dicePic, dicePic, 0, 255, 3, false);
-
-						//TEST
-						//cv::namedWindow("die", CV_WINDOW_AUTOSIZE);
-						//imshow("die", dicePic);
-						//cv::waitKey(0);
-						//END TEST
-
 						//count number of pips and add dice to vector
 						int pips = countPips(dicePic);
-						dice.push_back(pips);
+						
+						if (pips > 0 && pips < 7)
+						{
+							dice.push_back(pips);
 
-						//TEST
-						std::cout << pips << std::endl;
-						//END TEST
+							//TEST
+							std::cout << pips << std::endl;
+							//END TEST
+						}
 					}
 				}
 
@@ -226,7 +194,7 @@ std::vector<int> ReadDice::CheckDice(int amount)
 			}
 			else
 			{
-				minThresh = minThresh + 5;
+				minThresh = minThresh + 1;
 			}
 		}
 	}
