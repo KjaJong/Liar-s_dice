@@ -11,23 +11,14 @@ using std::string;
 bool LogicHandler::raise(const vector<int>* lastBid, const vector<int>* newBid)
 {
 	//check if new bid is not empty
-	if (newBid->size() == 0) return false;
-
 	//check for the max amount of 5 dice per bid
-	if (newBid->size() <= 5) return false;
-
-	//check if newBid containts valid numbers
-	if (!validDice(newBid)) return false;
-
-	//check if newBid contains out of the same values
-	if (!sameValues(newBid)) return false;
-
+	
+	//check if newBid contains out of the same values//check if newBid containts valid numbers
+	if (newBid->size() == 0 || newBid->size() > 5 || !validDice(newBid) || !sameValues(newBid)) return false;
 
 	//check if lastBid is empty AKA first bid in game
-	if (lastBid == nullptr) return true;
-
 	//check if the new value of eyes is higher
-	if (lastBid[0] < newBid[0]) return true;
+	if (lastBid == nullptr || lastBid[0] < newBid[0]) return true;
 
 	//check if the eyes value 
 	if (lastBid[0] == newBid[0]) 
