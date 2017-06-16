@@ -14,6 +14,7 @@ private:
 	void setWin();
 	void setLose();
 	void setGameOver();
+	void playSound(string sound);
 
 public:
 	SFX();

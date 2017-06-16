@@ -32,7 +32,7 @@ void Music::playMusic()
 	int curTrack = 1;
 
 	//set volume
-	musicEngine->setSoundVolume(0.5f);
+	musicEngine->setSoundVolume(0.1f);
 
 	//play first song
 	string track = music[curTrack - 1];

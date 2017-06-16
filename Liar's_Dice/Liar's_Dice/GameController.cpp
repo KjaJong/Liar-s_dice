@@ -73,6 +73,7 @@ void GameController::checkPlayers()
 	{
 		if (players[i].getAmountOfDice() == 0)
 		{
+			sound.playGameOver();
 			deletePlayer(i);
 		}
 	}
@@ -80,6 +81,7 @@ void GameController::checkPlayers()
 
 	if (players.size() == 1)
 	{
+		sound.playWin();
 		std::cout << "Player " << players[0].getName() << " has won the game." << std::endl;
 		system("pause");
 		exit(0);
@@ -87,6 +89,7 @@ void GameController::checkPlayers()
 
 	if(players.size() <= 0)
 	{
+		sound.playGameOver();
 		std::cout << "There are no winners, only losers." << std::endl;
 		system("pause");
 		exit(0);
@@ -97,7 +100,6 @@ void GameController::deletePlayer(int index)
 {
 	std::cout << "Player " << players[index].getName() <<  " is out of dice." << std::endl;
 	players.erase(players.begin() + index);
-	sound.playGameOver();
 }
 
 void GameController::turn()
@@ -215,12 +217,14 @@ void GameController::callBluff()
 	if(LH.callBluff(&playerDice, &curBid))
 	{
 		sound.playWin();
+		std::cout << "Good call! " << players[previousPlayer].getName() << " lost a dice." << std::endl;
 		players[previousPlayer].reduceDice();
 		pickFirstPlayer(previousPlayer);
 	}
 	else
 	{
 		sound.playLose();
+		std::cout << "Too bad, " << players[curPlayer].getName() << " lost a dice." << std::endl;
 		players[curPlayer].reduceDice();
 		pickFirstPlayer(curPlayer);
 	}
@@ -235,12 +239,14 @@ void GameController::spotOn()
 	if(LH.spotOn(&playerDice, &curBid))
 	{
 		sound.playWin();
+		std::cout << "Good call! Everyone besides " << players[curPlayer].getName() << " lost a dice." << std::endl;
 		for (int i = 0; i < players.size(); i++) { if (i != curPlayer) players[i].reduceDice(); }
 		pickFirstPlayer(curPlayer + 1);
 	}
 	else
 	{
 		sound.playLose();
+		std::cout << "Too bad, " << players[curPlayer].getName() << " lost a dice." << std::endl;
 		players[curPlayer].reduceDice();
 		pickFirstPlayer(curPlayer);
 	}

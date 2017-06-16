@@ -9,6 +9,7 @@ using std::string;
 using namespace irrklang;
 
 ISoundEngine *SFXEngine;
+ISound *soundEffect;
 
 SFX::SFX()
 {
@@ -58,7 +59,7 @@ void SFX::playWin()
 	int random = rand() % win.size() + 1;
 	string sound = win[random - 1];
 
-	SFXEngine->play2D(sound.c_str());
+	playSound(sound);
 }
 
 void SFX::playLose()
@@ -66,7 +67,7 @@ void SFX::playLose()
 	int random = rand() % lose.size() + 1;
 	string sound = lose[random - 1];
 
-	SFXEngine->play2D(sound.c_str());
+	playSound(sound);
 }
 
 void SFX::playGameOver()
@@ -74,5 +75,32 @@ void SFX::playGameOver()
 	int random = rand() % gameOver.size() + 1;
 	string sound = gameOver[random - 1];
 
-	SFXEngine->play2D(sound.c_str());
+	playSound(sound);
+}
+
+void SFX::playSound(string sound)
+{
+	string effect = sound;
+
+	if (soundEffect == nullptr)
+	{
+		soundEffect = SFXEngine->play2D(effect.c_str(), false, false, true);
+	}
+	else if (soundEffect->isFinished())
+	{
+		soundEffect = SFXEngine->play2D(effect.c_str(), false, false, true);
+	}
+	else
+	{
+		while (true)
+		{
+			_sleep(500);
+			
+			if (soundEffect->isFinished())
+			{
+				soundEffect = SFXEngine->play2D(effect.c_str(), false, false, true);
+				break;
+			}
+		}
+	}
 }

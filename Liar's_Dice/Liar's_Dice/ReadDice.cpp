@@ -113,7 +113,7 @@ std::vector<int> ReadDice::CheckDice(int amount)
 							dice.push_back(pips);
 
 							//TEST
-							std::cout << pips << std::endl;
+							//std::cout << pips << std::endl;
 							//END TEST
 						}
 					}
@@ -180,7 +180,7 @@ std::vector<int> ReadDice::CheckDice(int amount)
 							dice.push_back(pips);
 
 							//TEST
-							std::cout << pips << std::endl;
+							//std::cout << pips << std::endl;
 							//END TEST
 						}
 					}
