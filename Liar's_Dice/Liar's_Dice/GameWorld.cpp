@@ -8,7 +8,17 @@
 int screenWidth = 1200;
 int screenHeight = 800;
 
-float rotation = 0;
+//Variables needed for dice animations
+std::vector<int> rotation;
+std::vector<int> rotateTo;
+std::vector<int> numbers;
+std::vector<int> position;
+bool startAnimation = false;
+bool wait = false;
+bool revealed = false;
+double cupheight = -0.35;
+
+//float rotation = 0;
 std::vector<std::pair<int, ObjModel*> > models;
 int currentModel = 4;
 
@@ -117,7 +127,7 @@ void display()
 	0,1,0);
 
 
-	glRotatef(rotation, 0, 1, 0);
+	//glRotatef(rotation, 0, 1, 0);
 	models[currentModel].second->draw();
 	
 	glutSwapBuffers();
@@ -166,6 +176,18 @@ void GameWorld::startGlut(int argc, char* argv[])
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 
+	//Initialize everything needed for the dice
+	position.push_back(0);
+	position.push_back(-8);
+	position.push_back(8);
+	position.push_back(-16);
+	position.push_back(16);
+
+	for (int i = 0; i < 5; i++) {
+		rotateTo.push_back(0);
+		rotation.push_back(0);
+	}
+
 	//Last call, this starts all processes.
 	glutMainLoop();
 }
@@ -174,13 +196,64 @@ void GameWorld::animateRaise(vector<int> dice)
 {
 	//TODO animte to new bid
 
-	rotation += 45.0f;
+	//rotation += 45.0f;
 
 }
 
 void GameWorld::animateRollDice(Player player)
 {
 	//TODO hugo code
+	//Reset everything
+	cupheight = -0.35;
+	revealed = false;
+	for (int i = 0; i < rotation.size(); i++) {
+		rotation.at(i) = 0;
+	}
+
+	startAnimation = true;
+}
+
+void displayDice() {
+	glPushMatrix();
+	gluLookAt(0, models[1].first*1.1, models[1].first * 2, 0, 0, 0, 0, 1, 0);
+	glScalef(22, 22, 22);
+	glRotatef(180, 1, 0, 0);
+	glTranslatef(0, cupheight, 0.2);
+	models[1].second->draw();
+	glPopMatrix();
+	if (numbers.size() > 0) {
+		for (unsigned int i = 0; i < numbers.size(); i++) {
+			glPushMatrix();
+			gluLookAt(0, models[0].first*1.1, models[0].first * 2, position.at(i), 0, 0, 0, 1, 0);
+			if (startAnimation == true) {
+				if (numbers.at(i) == 1) {
+					rotateTo.at(i) = 180;
+					glRotatef(rotation.at(i), 1, 0, 0); //1
+				}
+				if (numbers.at(i) == 2) {
+					rotateTo.at(i) = 90;
+					glRotatef(rotation.at(i), 1, 0, 0);	//2
+				}
+				if (numbers.at(i) == 3) {
+					rotateTo.at(i) = 90;
+					glRotatef(rotation.at(i), 0, 0, 1);	//3
+				}
+				if (numbers.at(i) == 4) {
+					rotateTo.at(i) = -90;
+					glRotatef(rotation.at(i), 0, 0, 1); //4
+				}
+				if (numbers.at(i) == 5) {
+					rotateTo.at(i) = -90;
+					glRotatef(rotation.at(i), 1, 0, 0); //5
+				}
+				if (numbers.at(i) == 6) {
+					//Literally, do nothing. It's already on 6.
+				}
+			}
+			models[0].second->draw();
+			glPopMatrix();
+		}
+	}
 }
 
 void GameWorld::animateSpotOn(bool isSpotOn)
