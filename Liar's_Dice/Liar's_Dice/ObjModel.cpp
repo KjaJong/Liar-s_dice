@@ -193,12 +193,22 @@ ObjModel::~ObjModel(void)
 
 void ObjModel::draw()
 {
+	glPushMatrix();
+
+
+	glRotatef(rotatef.x, 1, 0, 0);
+	glRotatef(rotatef.y, 0, 1, 0);
+	glRotatef(rotatef.z, 0, 0, 1);
+
+	glTranslatef(0, 0, -20);
+	glScalef(scalef.x, scalef.y, scalef.z);
+
 	for (auto group : groups)
 	{
-		glPushMatrix();
-		glRotatef(group->rotations.x], 1, 0, 0);
-		glRotatef(group->rotations.y], 0, 1, 0);
-		glRotatef(group->rotations.z], 0, 0, 1);
+		//glPushMatrix();
+		//glRotatef(group->rotationsf.x, 1, 0, 0);
+		//glRotatef(group->rotationsf.y, 0, 1, 0);
+		//glRotatef(group->rotationsf.z, 0, 0, 1);
 
 
 		auto &material = materials[group->materialIndex];
@@ -220,8 +230,9 @@ void ObjModel::draw()
 			}
 		}
 		glEnd();
-		glPopMatrix();
+		//glPopMatrix();
 	}
+	glPopMatrix();
 }
 
 void ObjModel::loadMaterialFile(const std::string &fileName, const std::string &dirName)

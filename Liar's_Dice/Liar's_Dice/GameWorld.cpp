@@ -10,7 +10,7 @@ int screenHeight = 800;
 
 float rotation = 0;
 std::vector<std::pair<int, ObjModel*> > models;
-int currentModel = 2;
+int currentModel = 4;
 
 
 struct Camera {
@@ -75,12 +75,21 @@ void initModels(void)
 	models.push_back(std::pair<int, ObjModel*>(10, new ObjModel("models/DiceOBJ/DiceLowpoly.obj")));
 	models.push_back(std::pair<int, ObjModel*>(1, new ObjModel("models/cup/cup.obj")));
 	models.push_back(std::pair<int, ObjModel*>(1, new ObjModel("models/player/xmasguy.obj")));
+	models.push_back(std::pair<int, ObjModel*>(1, new ObjModel("models/table/table.obj")));
+	//models.push_back(std::pair<int, ObjModel*>(1, new ObjModel("models/robot/full_rigged_robot.obj")));
+	//models.push_back(std::pair<int, ObjModel*>(10, new ObjModel("models/woman/woman.obj")));
+	models.push_back(std::pair<int, ObjModel*>(100, new ObjModel("models/man/3D-model.obj")));
+	models[4].second->scalef = 0.01f;
+	//models[4].second->rotatef = 45;
+	models[4].second->translatef = -50.0f;
+	//models[2].second->groups-> rotationsf.x = 10;
 
 }
 
 void display()
 {
 	glClearColor(0.5f, 0.5f, 0.7f, 1.0f); //Background colour, now purple
+	//glClearColor(0.5f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	//Sets the matrix for the projection. By calling you are setting (in order): The field of view, the aspect ratio of the
@@ -88,7 +97,7 @@ void display()
 	//Load identity always loads the matrix mode, and should always be called after glMatrixMode.
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(90.0f, screenWidth / (float)screenHeight, 0.1f, 500.0f);
+	gluPerspective(90.0f, screenWidth / (float)screenHeight, 0.1f, 5000.0f);
 
 
 	//Sets matrix for the modelview. The first three values set the x, y and z position for the eye. The next three do the same for
@@ -108,12 +117,6 @@ void display()
 	0,0,0,
 	0,1,0);
 
-	glBegin(GL_QUADS);
-		glVertex3f(-1, 0, 0);
-		glVertex3f(1, 0, 0);
-		glVertex3f(1, 10, 0);
-		glVertex3f(-1, 10, 0);
-	glEnd();
 
 	glRotatef(rotation, 0, 1, 0);
 	models[currentModel].second->draw();
