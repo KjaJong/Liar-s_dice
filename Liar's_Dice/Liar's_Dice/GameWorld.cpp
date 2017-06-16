@@ -68,6 +68,13 @@ void mousePasiveMotion(int x, int y)
 	}
 }
 
+void showText(string text)
+{
+	glRasterPos2i(300, 600);
+	glColor4f(0.0f, 0.0f, 0.0f, 1.0f);
+	glutBitmapString(GLUT_BITMAP_TIMES_ROMAN_24, (const unsigned char*)text.c_str());
+}
+
 void initModels(void)
 {
 	glEnable(GL_DEPTH_TEST);
@@ -106,6 +113,8 @@ void display()
 	glRotatef(camera.rotX, 1, 0, 0);
 	glRotatef(camera.rotY, 0, 1, 0);
 	glTranslatef(camera.posX, 0, camera.posY);
+
+	showText("Top kek m8");
 
 	/*gluLookAt(
 	0, models[currentModel].first*1.1, models[currentModel].first * 2, 
