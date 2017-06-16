@@ -82,7 +82,6 @@ void initModels(void)
 	models[4].second->scalef = 0.01f;
 	//models[4].second->rotatef = 45;
 	models[4].second->translatef = -50.0f;
-	//models[2].second->groups-> rotationsf.x = 10;
 
 }
 

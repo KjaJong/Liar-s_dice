@@ -200,7 +200,7 @@ void ObjModel::draw()
 	glRotatef(rotatef.y, 0, 1, 0);
 	glRotatef(rotatef.z, 0, 0, 1);
 
-	glTranslatef(0, 0, -20);
+	glTranslatef(translatef.x, translatef.y, translatef.z);
 	glScalef(scalef.x, scalef.y, scalef.z);
 
 	for (auto group : groups)
