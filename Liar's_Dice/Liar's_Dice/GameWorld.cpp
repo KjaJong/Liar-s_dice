@@ -14,6 +14,8 @@
 int screenWidth = 1200;
 int screenHeight = 800;
 
+void animateRollDice();
+
 //Variables needed for dice animations
 std::vector<int> rotation;
 std::vector<int> rotateTo;
@@ -136,7 +138,7 @@ void Keyboard(unsigned char key, int x, int y)
 			numbers.push_back(1);
 			numbers.push_back(5);
 		}
-		animateRollDice(numbers);
+		animateRollDice();
 		break;
 	case 'o':
 		std::cout << "Test";
@@ -206,7 +208,7 @@ void GameWorld::animateRaise(vector<int> dice)
 
 }
 
-void animateRollDice(Player player)
+void GameWorld::animateRollDice(Player player)
 {
 	//TODO hugo code
 	//Reset everything
