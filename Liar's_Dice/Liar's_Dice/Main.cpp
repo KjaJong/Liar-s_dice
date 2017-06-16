@@ -33,7 +33,7 @@ int main(int argc, char* argv[])
 	future<void> gameMusicThread = async(gameMusic);
 
 	//Starts the game loop thread
-	//future<void> gameLoopThread = async(gameLoop, initPlayers());
+	future<void> gameLoopThread = async(gameLoop, initPlayers());
 
 	return 0;
 }

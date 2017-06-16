@@ -16,6 +16,7 @@ SFX::SFX()
 	SFXEngine = createIrrKlangDevice();
 	setWin();
 	setLose();
+	setTurn();
 	setGameOver();
 }
 
@@ -55,6 +56,19 @@ void SFX::setGameOver()
 	gameOver.push_back("media/sfx/game over/Shutdown.mp3");
 }
 
+//turn sound effect
+void SFX::setTurn()
+{
+	turn.push_back("media/sfx/turn/click1.mp3");
+	turn.push_back("media/sfx/turn/click2.mp3");
+	turn.push_back("media/sfx/turn/click3.mp3");
+	turn.push_back("media/sfx/turn/click4.mp3");
+	turn.push_back("media/sfx/turn/click5.mp3");
+	turn.push_back("media/sfx/turn/click6.mp3");
+	turn.push_back("media/sfx/turn/click7.mp3");
+	turn.push_back("media/sfx/turn/click8.mp3");
+}
+
 void SFX::playWin()
 {
 	std::cout << win.size() << std::endl;
@@ -77,6 +91,14 @@ void SFX::playGameOver()
 {
 	int random = rand() % gameOver.size() + 1;
 	string sound = gameOver[random - 1];
+
+	playSound(sound);
+}
+
+void SFX::playTurn()
+{
+	int random = rand() % turn.size() + 1;
+	string sound = turn[random - 1];
 
 	playSound(sound);
 }
