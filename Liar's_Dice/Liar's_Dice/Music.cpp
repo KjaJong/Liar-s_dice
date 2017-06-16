@@ -2,16 +2,15 @@
 #include <irrKlang.h>
 #include <vector>
 #include <string>
+#include <iostream>
 
 using std::vector;
 using std::string;
 using namespace irrklang;
 
-vector<string> music;
-
 Music::Music()
 {
-
+	setMusic();
 }
 
 Music::~Music()
@@ -33,7 +32,7 @@ void Music::playMusic()
 	int curTrack = 1;
 
 	//set volume
-	musicEngine->setSoundVolume(0.5f);
+	musicEngine->setSoundVolume(0.1f);
 
 	//play first song
 	string track = music[curTrack - 1];
