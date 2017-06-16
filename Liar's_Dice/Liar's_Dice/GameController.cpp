@@ -1,4 +1,5 @@
 #include "GameController.h"
+#include "GameWorld.h"
 #include "Player.h"
 #include "LogicHandler.h"
 #include "ReadDice.h"
@@ -7,12 +8,14 @@
 #include <vector>
 #include <string>
 
+
 using std::vector;
 using std::string;
 
 LogicHandler LH;
 ReadDice RD;
 SFX sound;
+GameWorld GW;
 
 int previousPlayer;
 vector<int> curBid;
@@ -155,6 +158,7 @@ void GameController::rollDice()
 		if (diceList.size() == diceAmount)
 		{
 			players[i].setDice(diceList);
+			GW.animateRollDice(players[i]);			
 		}
 		else
 		{
@@ -189,6 +193,7 @@ void GameController::raise()
 			//set new current bid
 			std::cout << "New bid accepted." << std::endl;
 			curBid = newBid;
+			GW.animateRaise(newBid);
 		}
 		else
 		{
@@ -215,12 +220,14 @@ void GameController::callBluff()
 	if(LH.callBluff(&playerDice, &curBid))
 	{
 		sound.playWin();
+		GW.animteCallBluff(true);
 		players[previousPlayer].reduceDice();
 		pickFirstPlayer(previousPlayer);
 	}
 	else
 	{
 		sound.playLose();
+		GW.animteCallBluff(false);
 		players[curPlayer].reduceDice();
 		pickFirstPlayer(curPlayer);
 	}
@@ -235,11 +242,13 @@ void GameController::spotOn()
 	if(LH.spotOn(&playerDice, &curBid))
 	{
 		sound.playWin();
+		GW.animateSpotOn(true);
 		for (int i = 0; i < players.size(); i++) { if (i != curPlayer) players[i].reduceDice(); }
 		pickFirstPlayer(curPlayer + 1);
 	}
 	else
 	{
+		GW.animateSpotOn(false);
 		sound.playLose();
 		players[curPlayer].reduceDice();
 		pickFirstPlayer(curPlayer);

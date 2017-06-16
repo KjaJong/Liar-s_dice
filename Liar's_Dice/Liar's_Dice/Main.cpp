@@ -17,7 +17,7 @@ vector<Player> initPlayers();
 void gameLoop(vector<Player> players);
 void gameWorld(int argc, char* argv[]);
 
-GameWorld GW = GameWorld();
+extern GameWorld GW;
 
 int main(int argc, char* argv[])
 {
