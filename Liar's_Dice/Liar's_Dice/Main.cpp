@@ -27,13 +27,13 @@ int main(int argc, char* argv[])
 	//TODO start multithreading
 
 	//Starts the gameworld thread
-	future<void> gameWorldThread = async(gameWorld, argc, argv);
+	//future<void> gameWorldThread = async(gameWorld, argc, argv);
 
 	//Starts the game music thread
 	future<void> gameMusicThread = async(gameMusic);
 
 	//Starts the game loop thread
-	future<void> gameLoopThread = async(gameLoop, initPlayers());
+	//future<void> gameLoopThread = async(gameLoop, initPlayers());
 
 	return 0;
 }

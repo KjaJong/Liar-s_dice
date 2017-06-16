@@ -20,8 +20,10 @@ Music::~Music()
 
 void Music::setMusic()
 {
-	music.push_back("media/music/Japanese Jazz.mp3");
-	music.push_back("media/music/KSP Build 1.mp3");
+	music.push_back("media/music/Beautiful Lies.mp3");
+	music.push_back("media/music/Memory Lane.mp3");
+	music.push_back("media/music/Power of sound.mp3");
+	music.push_back("media/music/The Black 80s.mp3");
 }
 
 void Music::playMusic()
@@ -32,7 +34,7 @@ void Music::playMusic()
 	int curTrack = 1;
 
 	//set volume
-	musicEngine->setSoundVolume(0.1f);
+	musicEngine->setSoundVolume(0.25f);
 
 	//play first song
 	string track = music[curTrack - 1];
