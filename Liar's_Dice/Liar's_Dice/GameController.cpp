@@ -107,6 +107,8 @@ void GameController::deletePlayer(int index)
 
 void GameController::turn()
 {
+	sound.playTurn();
+
 	std::cout << "Place one die and press enter if you are ready." << std::endl;
 	std::cout << "Set die value 1 to raise current bid" << std::endl;
 	std::cout << "Set die value 2 to call spot on" << std::endl;
@@ -143,6 +145,8 @@ void GameController::turn()
 
 void GameController::rollDice()
 {
+	sound.playTurn();
+
 	//set curbid to null
 	curBid.clear();
 

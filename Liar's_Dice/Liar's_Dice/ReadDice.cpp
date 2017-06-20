@@ -39,7 +39,7 @@ int countPips(Mat area)
 	cv::SimpleBlobDetector::Params params;
 	params.filterByCircularity = true;
 	params.minCircularity = 0.8;
-	
+
 	//params.filterByArea = true;
 	//params.minArea = 10;
 	//params.maxArea = 25;
@@ -174,7 +174,7 @@ std::vector<int> ReadDice::CheckDice(int amount)
 
 						//count number of pips and add dice to vector
 						int pips = countPips(dicePic);
-						
+
 						if (pips > 0 && pips < 7)
 						{
 							dice.push_back(pips);
