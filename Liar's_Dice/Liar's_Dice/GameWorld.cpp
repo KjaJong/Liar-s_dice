@@ -41,7 +41,9 @@ void display(void)
 	//glRotatef(rotation, 0, 1, 1);
 	//glRotatef(rotation, 1, 0, 0); //1
 
-	displayDice();
+	if (startAnimation) {
+		displayDice();
+	}
 
 	glutSwapBuffers();
 }
@@ -174,7 +176,7 @@ void GameWorld::startGlut(int argc, char* argv[])
 	glutInit(&argc, argv);
 	glutInitWindowSize(1280, 800);
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	glutCreateWindow("GLUT example");
+	glutCreateWindow("Liar's dice");
 	// Initialize OpenGL graphics state
 	initGraphics();
 	// Register callbacks:
@@ -218,6 +220,19 @@ void GameWorld::animateRollDice(Player player)
 		rotation.at(i) = 0;
 	}
 	numbers = player.getDice();
+	startAnimation = true;
+}
+
+void GameWorld::animateRollDice(std::vector<int> dice)
+{
+	//TODO hugo code
+	//Reset everything
+	cupheight = -0.35;
+	revealed = false;
+	for (int i = 0; i < rotation.size(); i++) {
+		rotation.at(i) = 0;
+	}
+	numbers = dice;
 	startAnimation = true;
 }
 

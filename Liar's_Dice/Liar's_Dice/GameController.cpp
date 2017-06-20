@@ -195,7 +195,7 @@ void GameController::raise()
 			//set new current bid
 			std::cout << "New bid accepted." << std::endl;
 			curBid = newBid;
-			GW.animateRaise(newBid);
+			GW.animateRollDice(newBid);
 		}
 		else
 		{
@@ -222,14 +222,14 @@ void GameController::callBluff()
 	if(LH.callBluff(&playerDice, &curBid))
 	{
 		sound.playWin();
-		GW.animteCallBluff(true);
+		GW.animateRollDice(players[previousPlayer]);
 		players[previousPlayer].reduceDice();
 		pickFirstPlayer(previousPlayer);
 	}
 	else
 	{
 		sound.playLose();
-		GW.animteCallBluff(false);
+		GW.animateRollDice(players[previousPlayer]);
 		players[curPlayer].reduceDice();
 		pickFirstPlayer(curPlayer);
 	}
@@ -244,13 +244,13 @@ void GameController::spotOn()
 	if(LH.spotOn(&playerDice, &curBid))
 	{
 		sound.playWin();
-		GW.animateSpotOn(true);
+		GW.animateRollDice(players[previousPlayer]);
 		for (int i = 0; i < players.size(); i++) { if (i != curPlayer) players[i].reduceDice(); }
 		pickFirstPlayer(curPlayer + 1);
 	}
 	else
 	{
-		GW.animateSpotOn(false);
+		GW.animateRollDice(players[previousPlayer]);
 		sound.playLose();
 		std::cout << "Too bad, " << players[curPlayer].getName() << " lost a dice." << std::endl;
 		players[curPlayer].reduceDice();

@@ -1,5 +1,6 @@
 #pragma once
 #include <vector>
+#include "GameWorld.h"
 
 using std::vector;
 using std::string;

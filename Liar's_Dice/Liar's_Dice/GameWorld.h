@@ -6,6 +6,7 @@ private:
 	
 
 public:
+	void animateRollDice(std::vector<int>);
 	GameWorld();
 	~GameWorld();
 	void startGlut(int argc, char* argv[]);
